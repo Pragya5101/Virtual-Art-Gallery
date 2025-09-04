@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <img src="logo3.jpg" class="logo" />
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+       <a href="artists.html">Artists</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="content">
+      <div class="heading">
+        <h1>Contact Us</h1>
+      </div>
+
+      <div class="contact-container">
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <h2>Get In Touch</h2>
+          <form id="contactForm">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your Name"
+              required
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+              required
+            />
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              maxlength="500"
+              required
+            ></textarea>
+            <div class="char-counter" id="charCounter">0/500</div>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Contact Info Section -->
+       <!-- Contact Info Section -->
+        <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form     = document.getElementById('contactForm');
+  const counter  = document.getElementById('charCounter');
+
+  /* --- live character counter --- */
+  form.message.addEventListener('input', e => {
+    counter.textContent = `${e.target.value.length}/500`;
+  });
+
+  /* --- submission feedback --- */
+  form.addEventListener('submit', e => {
+    e.preventDefault();                 // stop the actual page refresh
+    showConfirmation();                 // visual feedback
+    form.reset();                       // clear fields
+    counter.textContent = '0/500';      // reset counter
+  });
+
+  function showConfirmation () {
+    // remove an old notice if it’s still visible
+    form.querySelector('.submit-confirmation')?.remove();
+
+    const note = document.createElement('p');
+    note.className = 'submit-confirmation';
+    note.textContent = '  Thank you! Your message has been sent.';
+    form.appendChild(note);
+
+    // fade out and remove after 4 s (optional)
+    setTimeout(() => note.remove(), 4000);
+  }
+});
+</script>
+
+<div class="contact-info-card">
+  <h3>Our Gallery Location</h3>
+  <p>Shivpuri near Law College, Buxar</p>
+  <p>Phone: 8948235101</p>
+  <p>
+    Email:
+    <a href="mailto:pragyak958@gmail.com">pragyak958@gmail.com</a>
+  </p>
+  <div class="location">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.5575466009745!2d83.9912345150115!3d25.56520098372354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3992fb6eae46dc1f%3A0x6d578ff8ae1c33a6!2sLaw%20College%2C%20Buxar!5e0!3m2!1sen!2sin!4v1620220000000!5m2!1sen!2sin"
+     
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</div>
+</div>
+</div>
+
+    <div class="social-media" style="text-align: center; margin-top: 20px">
+      <h2 style="color: rgb(111, 69, 10)">Follow Us on Our Social Media</h2>
+      <a href="https://www.facebook.com" target="_blank"
+        ><i class="fab fa-facebook"></i
+      ></a>
+      <a href="https://www.instagram.com" target="_blank"
+        ><i class="fab fa-instagram"></i
+      ></a>
+      <a href="https://www.twitter.com" target="_blank"
+        ><i class="fab fa-twitter"></i
+      ></a>
+      <a href="https://www.linkedin.com" target="_blank"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+    </div>
+    <footer>
+      <div style="max-width: 1200px; margin: 0 auto">
+        <div
+          style="display: flex; flex-wrap: wrap; justify-content: space-between"
+        >
+          <div style="flex: 1 1 300px; margin: 10px">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html">Home »</a></li>
+              <li><a href="artists.html#">For Artists »</a></li>
+              <li><a href="gallery.html">For Art Lovers »</a></li>
+
+              <li><a href="about.html">Learn More »</a></li>
+            </ul>
+          </div>
+          <div style="flex: 1 1 300px; margin: 10px">
+            <h4>Legal</h4>
+            <ul>
+              <li>
+                <a
+                  href="https://www.termsfeed.com/live/0e1eee9e-ad47-44b2-8d3a-0f59d920b71f"
+                  >Privacy Policy Terms & Conditions »</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div style="flex: 1 1 300px; margin: 10px">
+            <h4 style="color: #fbfcfd">Contact Us</h4>
+            <p><a href="mailto:pragyak958@gmail.com" style="color: #ffcb05;">Email »</a></p>
+            <p>
+              <a
+                href="https://www.linkedin.com/in/pragya-kumari-b8a1a8275"
+                style="color: #ffcb05"
+                target="_blank"
+                >People at LinkedIn »</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- Social Media Links with Font Awesome icons -->
+        <div style="text-align: center; margin-top: 20px">
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            style="
+              margin: 0 10px;
+              color: #fff;
+              font-size: 24px;
+              transition: transform 0.3s ease;
+            "
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            style="
+              margin: 0 10px;
+              color: #fff;
+              font-size: 24px;
+              transition: transform 0.3s ease;
+            "
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            style="
+              margin: 0 10px;
+              color: #fff;
+              font-size: 24px;
+              transition: transform 0.3s ease;
+            "
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+
+        <!-- Copyright Information -->
+        <div style="text-align: center; margin-top: 20px">
+          <p>&copy;  Virtual Art Gallery.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
