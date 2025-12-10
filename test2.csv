@@ -1,0 +1,337 @@
+Id,Title,Description,Preconditions,Scenario,Detailed Steps,Expected Result
+TC-001,Page Load - Initial State,Verify that the LMS Requests page loads correctly with all components visible,User is logged in and has access to LMS module,Page loads successfully,1. Navigate to LMS Requests page
+2. Wait for page to load completely
+3. Verify all components are rendered,Page loads successfully. CollectionBanner displays "LMS > Requests". LMSSearchFilter is visible. Empty state message "Select a Center" is displayed. No loading overlay is shown
+TC-002,Empty State Display - No Center Selected,Verify empty state is shown when no center is selected,User is on LMS Requests page,No center selected,1. Navigate to LMS Requests page
+2. Ensure no center is selected in the filter
+3. Observe the main content area,Empty state is displayed with icon, title "Select a Center", and subtitle "Please select a center from the filter above to view collection requests"
+TC-003,Center Dropdown - Open and Close,Verify center dropdown opens and closes correctly,User is on LMS Requests page,User interacts with center dropdown,1. Click on center dropdown button
+2. Verify dropdown opens
+3. Click outside dropdown or click close button
+4. Verify dropdown closes,Dropdown opens showing list of available centers. Dropdown closes when clicking outside or clicking close button
+TC-004,Center Selection - Single Center,Verify selecting a single center loads requests,User is on LMS Requests page with centers available,User selects one center,1. Click on center dropdown button
+2. Select a single center from the list
+3. Wait for requests to load
+4. Verify table appears,Selected center is displayed in dropdown button. Loading overlay appears briefly. CollectionRequestTable displays requests for selected center. Empty state disappears
+TC-005,Center Selection - Multiple Centers,Verify selecting multiple centers loads requests from all selected centers,User is on LMS Requests page with multiple centers available,User selects multiple centers,1. Click on center dropdown button
+2. Select first center
+3. Select second center (without closing dropdown)
+4. Select third center if available
+5. Click "Done" button
+6. Wait for requests to load,Multiple centers are selected. Dropdown shows "X selected" where X is number of centers. CollectionRequestTable displays requests from all selected centers combined
+TC-006,Center Selection - Select All Centers,Verify "Select All" option selects all available centers,User is on LMS Requests page with multiple centers available,User clicks Select All,1. Click on center dropdown button
+2. Click "Select All" option
+3. Verify all centers are selected
+4. Click "Done" button,All centers are selected. Dropdown shows total count of selected centers. Requests from all centers are displayed
+TC-007,Center Selection - Deselect Center,Verify deselecting a center updates the request list,User has multiple centers selected,User deselects a center,1. Open center dropdown
+2. Click on a selected center to deselect it
+3. Verify at least one center remains selected
+4. Click "Done" button
+5. Wait for requests to reload,Deselected center is removed from selection. At least one center remains selected (minimum requirement). Request list updates to show requests from remaining selected centers
+TC-008,Center Selection - Minimum One Center Required,Verify that at least one center must always be selected,User has one center selected,User tries to deselect the last center,1. Open center dropdown
+2. Try to deselect the only selected center
+3. Verify center remains selected,Last center cannot be deselected. Center remains selected. Visual indicator shows "(Required)" text. Cursor shows "not-allowed" on hover
+TC-009,User Dropdown - Open and Close,Verify user dropdown opens and closes correctly,User has selected at least one center,User interacts with user dropdown,1. Click on user dropdown button
+2. Verify dropdown opens showing roles panel
+3. Click outside dropdown
+4. Verify dropdown closes,User dropdown opens showing roles panel on left. Dropdown closes when clicking outside
+TC-010,User Dropdown - Role Expansion,Verify expanding a role shows users in that role,User has selected center and user dropdown is open,User expands a role,1. Click on user dropdown button
+2. Click on a role name (e.g., "FIELD", "SALES_EXEC")
+3. Verify users panel appears on right
+4. Verify users in that role are displayed,Role is highlighted. Users panel appears on right side showing all users in that role. Users are displayed with name and mobile number
+TC-011,User Selection - Single User,Verify selecting a single user filters requests,User has expanded a role,User selects one user,1. Expand a role in user dropdown
+2. Click on a user to select
+3. Close user dropdown
+4. Verify requests are filtered,User is selected (checkbox checked). Dropdown button shows selected user name. Request table filters to show only requests requested by that user
+TC-012,User Selection - Multiple Users,Verify selecting multiple users filters requests,User has expanded a role,User selects multiple users,1. Expand a role in user dropdown
+2. Select first user
+3. Select second user
+4. Select third user
+5. Close user dropdown
+6. Verify requests are filtered,Multiple users are selected. Dropdown button shows "X selected" where X is number of users. Request table filters to show requests requested by any of the selected users
+TC-013,User Selection - Select All Users,Verify "Select All" option selects all users,User has selected center,User clicks Select All,1. Click on user dropdown button
+2. Click "Select All" option
+3. Verify all users are selected
+4. Close dropdown,All users including "Unassigned" (if enabled) are selected. Dropdown shows total count. Request table shows all requests (no filtering applied)
+TC-014,User Selection - Select All in Role,Verify selecting all users in a specific role,User has expanded a role,User clicks "All in Role",1. Expand a role in user dropdown
+2. Click "All in [Role Name]" option
+3. Verify all users in that role are selected,All users in the expanded role are selected. Checkbox next to "All in [Role Name]" is checked. Request table filters accordingly
+TC-015,User Selection - Unassigned Option,Verify selecting "Unassigned" option works correctly,User has selected center and Unassigned option is enabled,User selects Unassigned,1. Click on user dropdown button
+2. Click on "Unassigned" option
+3. Verify it is selected
+4. Close dropdown,Unassigned option is highlighted. Checkmark appears. Dropdown shows "Unassigned" when only this option is selected
+TC-016,User Selection - Minimum One User Required,Verify that at least one user must always be selected,User has one user selected,User tries to deselect the last user,1. Open user dropdown
+2. Try to deselect the only selected user
+3. Verify user remains selected,Last user cannot be deselected. User remains selected. Minimum one user requirement is enforced
+TC-017,Search Functionality - Basic Search,Verify search input filters requests by customer name or mobile,User has selected center and requests are loaded,User performs search,1. Enter customer name or mobile number in search input
+2. Click search button or press Enter
+3. Verify requests are filtered,Search input accepts text. Requests are filtered to show only matching customers (by name or mobile). Table updates to show filtered results
+TC-018,Search Functionality - Search with Enter Key,Verify search works when pressing Enter key,User has selected center and requests are loaded,User presses Enter in search field,1. Enter search text in search input
+2. Press Enter key
+3. Verify search is executed,Search is executed automatically. Requests are filtered. No need to click search button
+TC-019,Search Functionality - Clear Search,Verify clearing search shows all requests again,User has performed a search,User clears search,1. Enter search text and execute search
+2. Clear the search input field
+3. Click search button or press Enter
+4. Verify all requests are shown again,Search input is cleared. All requests matching center/user filters are displayed again
+TC-020,Search Functionality - Search Precedence,Verify search text takes precedence over context customer name,User navigates from action menu with collectionId and customerInfo,User performs search,1. Navigate to page with collectionId and customerInfo in context
+2. Enter different search text
+3. Execute search
+4. Verify search text is used,Search text is used for filtering instead of context customerInfo. Requests are filtered by search text
+TC-021,Table Display - Pending Tab,Verify pending requests are displayed correctly,User has selected center and requests are loaded,User views pending tab,1. Select a center
+2. Wait for requests to load
+3. Verify "Pending" tab is active by default
+4. Verify pending requests are displayed,Pending tab is highlighted. Table displays only pending requests. Each request shows collectionId, customer name, request type, status, requested by, submitted date, and Review button
+TC-022,Table Display - Approved Tab,Verify approved requests are displayed correctly,User has selected center,User switches to approved tab,1. Select a center
+2. Click on "Approved" tab
+3. Wait for requests to load
+4. Verify approved requests are displayed,Approved tab is highlighted. Tab shows "Last X Days" subtitle. Table displays only approved requests from last X days (default 30). Each request shows Details button instead of Review
+TC-023,Table Display - Rejected Tab,Verify rejected requests are displayed correctly,User has selected center,User switches to rejected tab,1. Select a center
+2. Click on "Rejected" tab
+3. Wait for requests to load
+4. Verify rejected requests are displayed,Rejected tab is highlighted. Tab shows "Last X Days" subtitle. Table displays only rejected requests from last X days (default 30). Each request shows Details button
+TC-024,Table Sorting - Collection ID Column,Verify sorting by Collection ID column works,User has requests displayed in table,User clicks Collection ID header,1. Click on "ID" column header
+2. Verify requests are sorted ascending
+3. Click again to sort descending
+4. Verify sort order changes,First click sorts ascending (↑ indicator). Second click sorts descending (↓ indicator). Requests are reordered accordingly
+TC-025,Table Sorting - Customer Column,Verify sorting by Customer column works,User has requests displayed in table,User clicks Customer header,1. Click on "Customer" column header
+2. Verify requests are sorted by customer name
+3. Click again to reverse sort order,Requests are sorted alphabetically by customer name. Sort indicator shows current direction. Clicking again reverses the order
+TC-026,Table Sorting - Request Type Column,Verify sorting by Request Type column works,User has requests displayed in table,User clicks Request Type header,1. Click on "Request Type" column header
+2. Verify requests are sorted by request type
+3. Verify sort indicator appears,Requests are sorted by request type name. Sort indicator (↕) appears on header
+TC-027,Table Sorting - Status Column,Verify sorting by Status column works,User has requests displayed in table,User clicks Status header,1. Click on "Status" column header
+2. Verify requests are sorted by status
+3. Verify sort indicator appears,Requests are sorted by status (APPROVED, PENDING, REJECTED). Sort indicator appears
+TC-028,Table Sorting - Request By Column,Verify sorting by Request By column works,User has requests displayed in table,User clicks Request By header,1. Click on "Request By" column header
+2. Verify requests are sorted by requester name
+3. Verify sort indicator appears,Requests are sorted alphabetically by requester name. Sort indicator appears
+TC-029,Table Sorting - Submitted On Column,Verify sorting by Submitted On column works,User has requests displayed in table,User clicks Submitted On header,1. Click on "Submitted On" column header
+2. Verify requests are sorted by date
+3. Click again to reverse order,Requests are sorted by submission date. First click sorts oldest first, second click sorts newest first
+TC-030,Review Button - Pending Request,Verify Review button opens appropriate modal for pending request,User has pending requests displayed,User clicks Review button,1. Locate a pending request in the table
+2. Click "Review" button
+3. Verify modal opens,Review button is visible and clickable. Appropriate modal opens based on request type (Fine Waiver, EMI Tenure, EMI Reschedule, or Part Payment). Modal displays request details in review mode
+TC-031,Details Button - Approved Request,Verify Details button opens view-only modal for approved request,User has approved requests displayed,User clicks Details button,1. Switch to "Approved" tab
+2. Locate an approved request
+3. Click "Details" button
+4. Verify modal opens in view mode,Details button is visible and clickable. Modal opens in view mode (read-only). Modal displays review details and reviewer comment
+TC-032,Details Button - Rejected Request,Verify Details button opens view-only modal for rejected request,User has rejected requests displayed,User clicks Details button,1. Switch to "Rejected" tab
+2. Locate a rejected request
+3. Click "Details" button
+4. Verify modal opens in view mode,Details button is visible and clickable. Modal opens in view mode (read-only). Modal displays rejection reason and reviewer comment
+TC-033,Modal - Fine Waiver Request,Verify Fine Waiver modal opens with correct data,User has a Fine Waiver pending request,User clicks Review button,1. Locate a Fine Waiver request
+2. Click "Review" button
+3. Verify Fine Waiver modal opens
+4. Verify modal displays fine amount and customer details,Fine Waiver modal opens. Modal displays actual fine amount from requestStaticData. Customer information is populated correctly
+TC-034,Modal - EMI Tenure Change Request,Verify EMI Tenure Change modal opens with correct data,User has an EMI Tenure Change pending request,User clicks Review button,1. Locate an EMI Tenure Change request
+2. Click "Review" button
+3. Verify EMI Tenure Change modal opens
+4. Verify modal displays tenure details,EMI Tenure Change modal opens. Modal displays current EMI amount, total terms, completed terms, and EMI payment day. All data is populated from requestStaticData
+TC-035,Modal - EMI Reschedule Request,Verify EMI Reschedule modal opens with correct data,User has an EMI Reschedule pending request,User clicks Review button,1. Locate an EMI Reschedule request
+2. Click "Review" button
+3. Verify EMI Reschedule modal opens
+4. Verify modal displays EMI details,EMI Reschedule modal opens. Modal displays EMI amount, current EMI day, new EMI day, and due date. Data is populated correctly
+TC-036,Modal - Part Payment Request,Verify Part Payment modal opens with correct data,User has a Part Payment pending request,User clicks Review button,1. Locate a Part Payment request
+2. Click "Review" button
+3. Verify Part Payment modal opens
+4. Verify modal displays payment details,Part Payment modal opens. Modal displays pending amount, first part amount, second part amount, and second part date. Data is populated correctly
+TC-037,Loading State - Initial Load,Verify loading overlay appears during initial request fetch,User selects a center for the first time,User selects center,1. Navigate to LMS Requests page
+2. Select a center
+3. Observe loading state,Loading overlay appears with spinner and message "Loading collection requests...". Overlay covers entire screen. Table is not visible during loading
+TC-038,Loading State - Tab Switch,Verify loading overlay appears when switching tabs,User has requests loaded,User switches tab,1. Select a center and wait for requests to load
+2. Click on "Approved" tab
+3. Observe loading state,Loading overlay appears briefly. Requests are fetched for the new tab. Overlay disappears when data is loaded
+TC-039,Loading State - Filter Change,Verify loading state appears when filters change,User has requests loaded,User changes filter,1. Select a center and wait for requests to load
+2. Change center selection
+3. Observe loading state,Loading overlay appears. Requests are refetched with new filters. Overlay disappears when new data is loaded
+TC-040,Error State - API Error,Verify error message is displayed when API fails,User selects a center but API returns error,API call fails,1. Select a center
+2. Simulate API error (network failure or server error)
+3. Verify error is displayed,Error message is displayed in table area. Toast notification shows error message. User can retry by changing filters
+TC-041,Empty State - No Requests Found,Verify empty state is shown when no requests match filters,User has selected center but no requests exist,No requests match current filters,1. Select a center
+2. Wait for API response
+3. Verify empty state is displayed,Empty state message "No collection requests found" is displayed. Table is not shown. User can change filters to find requests
+TC-042,Empty State - User Filter No Match,Verify empty state when user filter returns no results,User has selected center and users,User filter returns no matches,1. Select a center
+2. Select specific users
+3. Verify if no requests match selected users,Empty state is displayed if no requests match selected users. Message indicates no requests found
+TC-043,Context Integration - CollectionId Navigation,Verify page loads correctly when navigated with collectionId,User navigates from action menu with collectionId,User arrives with collectionId,1. Navigate from action menu with collectionId in context
+2. Verify page loads
+3. Verify requests are loaded for that collection,Page loads successfully. CollectionRequestTable receives collectionId prop. Requests for that specific collection are displayed. Center dropdown shows centers from API response
+TC-044,Context Integration - CollectionId Persistence,Verify collectionId persists until user changes center,User arrives with collectionId,User changes center selection,1. Navigate with collectionId
+2. Verify requests load for that collection
+3. Change center selection manually
+4. Verify collectionId is cleared,Initial load uses collectionId. When user manually changes center, collectionId is cleared from context. Requests are fetched using new center selection
+TC-045,Context Integration - Center Info Update,Verify center information is updated in context when center is selected,User selects a center,User selects center from dropdown,1. Select a center from dropdown
+2. Verify context is updated
+3. Check if centerId, centerIds, centerName, centerNames are set,Context is updated with selected center information. centerId contains primary center ID. centerIds contains all selected center IDs. centerName and centerNames are populated
+TC-046,Filter Integration - Center and User Combined,Verify filtering works when both center and user are selected,User has multiple centers and users available,User selects center and user,1. Select multiple centers
+2. Select specific users
+3. Verify requests are filtered,Requests are filtered to show only requests from selected centers AND requested by selected users. Filtering is applied correctly
+TC-047,Filter Integration - Center User and Search Combined,Verify filtering works with all filters combined,User has selected center and user,User adds search text,1. Select center(s)
+2. Select user(s)
+3. Enter search text
+4. Execute search
+5. Verify requests are filtered,Requests are filtered by center, user, AND search text. All filters are applied simultaneously. Only matching requests are displayed
+TC-048,Table Row - Customer Name Link,Verify customer name link opens Customer360 page,User has requests displayed,User clicks customer name link,1. Locate a request with customer name
+2. Click on customer name link
+3. Verify new tab opens,Link opens Customer360 page in new tab. URL contains customer mobile number. Original page remains open
+TC-049,Table Row - Hover Effect,Verify table row has hover effect,User has requests displayed,User hovers over table row,1. Hover mouse over a table row
+2. Verify visual feedback,Row background changes color on hover. Row scales slightly (scale-[1.01]). Shadow effect appears
+TC-050,Responsive Design - Mobile View,Verify page is responsive on mobile devices,User accesses page on mobile device,User views page on mobile,1. Open page on mobile device or resize browser to mobile width
+2. Verify layout adapts
+3. Verify all components are accessible,Layout adapts to mobile screen. Components stack vertically if needed. Dropdowns are accessible. Table is scrollable horizontally if needed
+TC-051,Recent Days Configuration,Verify recent days configuration is fetched and used,User switches to Approved or Rejected tab,User views approved/rejected requests,1. Select a center
+2. Click on "Approved" or "Rejected" tab
+3. Verify recent days is fetched from config
+4. Verify tab subtitle shows correct days,Config param "COLLECTION_REQUEST_HISTORY_DAYS" is fetched. Tab subtitle shows "Last X Days" where X is from config. Default is 30 if config not available
+TC-052,Concurrent API Calls Prevention,Verify multiple API calls are not made simultaneously,User rapidly changes filters,User changes filters quickly,1. Select a center
+2. Quickly change to another center
+3. Quickly change to third center
+4. Verify only one API call is in progress,Only one API call is executed at a time. Previous calls are cancelled or queued. Loading state is managed correctly
+TC-053,Component Unmount - Cleanup,Verify context is cleaned up on component unmount,User navigates away from page,User leaves LMS Requests page,1. Navigate to LMS Requests page
+2. Select a center
+3. Navigate away from page
+4. Verify cleanup occurs,centerId is cleared from context on unmount. No memory leaks. Context state is reset
+TC-054,Data Test IDs - All Elements,Verify all interactive elements have data-testid attributes,User is on LMS Requests page,User inspects elements,1. Open browser DevTools
+2. Inspect various elements (buttons, inputs, dropdowns, table rows)
+3. Verify data-testid attributes exist,All interactive elements have data-testid attributes. Test IDs follow naming conventions. Elements are testable with Playwright
+TC-055,Banner Component - Display,Verify CollectionBanner displays correctly,User is on LMS Requests page,User views banner,1. Navigate to LMS Requests page
+2. Verify banner is displayed
+3. Verify heading and subheading,Banner displays "LMS > Requests" with arrow icon. Heading is bold and properly styled. Banner is positioned correctly
+TC-056,Filter Reset - Center Change Clears Users,Verify changing center clears user selection,User has selected center and users,User changes center,1. Select a center
+2. Select specific users
+3. Change center selection
+4. Verify user selection is cleared,User selection is cleared when center changes. New users are fetched for new center. User dropdown updates with new user list
+TC-057,Filter Reset - Multiple Centers User Fetch,Verify users are fetched for all selected centers,User selects multiple centers,User selects multiple centers,1. Select first center
+2. Select second center
+3. Select third center
+4. Verify users are fetched for all centers,Users from all selected centers are fetched and combined. User dropdown shows users from all selected centers. Duplicate users are handled correctly
+TC-058,Table Pagination - Large Dataset,Verify table handles large number of requests,User has center with many requests,User views requests,1. Select a center with many requests (100+)
+2. Verify table displays all requests
+3. Verify scrolling works,All requests are displayed in table. Table is scrollable. Performance is acceptable. No lag or freezing
+TC-059,Modal Close - After Review,Verify modal closes after successful review,User reviews a pending request,User approves/rejects request,1. Click Review button on pending request
+2. Fill review form
+3. Submit review (approve or reject)
+4. Verify modal closes,Modal closes after successful submission. Table refreshes to show updated request status. Success toast notification appears
+TC-060,Modal Close - Cancel Action,Verify modal closes when cancelled,User opens review modal,User cancels review,1. Click Review button
+2. Click close/cancel button in modal
+3. Verify modal closes,Modal closes without saving changes. Table remains unchanged. No data is submitted
+TC-061,Request Status Badge - Pending,Verify pending status badge displays correctly,User has pending requests,User views pending requests,1. View pending tab
+2. Locate a pending request
+3. Verify status badge,Status badge shows "PENDING" with yellow background. Badge is styled correctly (bg-yellow-100 text-yellow-800)
+TC-062,Request Status Badge - Approved,Verify approved status badge displays correctly,User has approved requests,User views approved requests,1. View approved tab
+2. Locate an approved request
+3. Verify status badge,Status badge shows "APPROVED" with green background. Badge is styled correctly (bg-green-100 text-green-800)
+TC-063,Request Status Badge - Rejected,Verify rejected status badge displays correctly,User has rejected requests,User views rejected requests,1. View rejected tab
+2. Locate a rejected request
+3. Verify status badge,Status badge shows "REJECTED" with red background. Badge is styled correctly (bg-red-100 text-red-800)
+TC-064,Date Format - Submitted On,Verify date is formatted correctly in table,User has requests displayed,User views submitted dates,1. View requests in table
+2. Locate "Submitted On" column
+3. Verify date format,Dates are displayed in locale format (e.g., MM/DD/YYYY). Dates are readable and properly formatted
+TC-065,Accessibility - Keyboard Navigation,Verify page is accessible via keyboard,User navigates using keyboard only,User uses keyboard,1. Use Tab key to navigate through elements
+2. Use Enter/Space to activate buttons
+3. Use Arrow keys in dropdowns
+4. Verify all elements are accessible,All interactive elements are focusable. Keyboard navigation works correctly. Focus indicators are visible. Dropdowns can be navigated with keyboard
+TC-066,Accessibility - Screen Reader,Verify page is accessible to screen readers,User uses screen reader,User navigates with screen reader,1. Enable screen reader
+2. Navigate through page elements
+3. Verify all elements are announced,All elements have proper ARIA labels. Screen reader announces all content correctly. Interactive elements are properly described
+TC-067,Performance - Initial Load Time,Verify page loads within acceptable time,User navigates to page,User opens page,1. Navigate to LMS Requests page
+2. Measure time until page is interactive
+3. Verify performance metrics,Page loads within 3 seconds. All components render quickly. No blocking operations
+TC-068,Performance - Filter Response Time,Verify filters respond quickly,User changes filters,User changes filter selection,1. Select a center
+2. Change user selection
+3. Measure response time
+4. Verify performance,Filter changes respond within 1 second. Table updates quickly. No noticeable lag
+TC-069,Edge Case - No Centers Available,Verify behavior when no centers are assigned,User has no assigned centers,User views page,1. Login as user with no assigned centers
+2. Navigate to LMS Requests page
+3. Verify behavior,Center dropdown shows "No centers available" message. Empty state is displayed. User cannot proceed without centers
+TC-070,Edge Case - No Users Available,Verify behavior when no users are available for selected center,User selects center with no users,User selects center,1. Select a center that has no users mapped
+2. Verify user dropdown behavior,User dropdown shows "No users found" message. User selection is empty. Requests may still load if not filtered by user
+TC-071,Edge Case - Invalid CollectionId,Verify behavior when invalid collectionId is provided,User navigates with invalid collectionId,User arrives with invalid collectionId,1. Navigate with invalid/non-existent collectionId
+2. Verify error handling,Error message is displayed. Empty state or error state is shown. User can select center to proceed
+TC-072,Edge Case - Network Timeout,Verify behavior when API call times out,User selects center but network is slow,API call times out,1. Simulate slow network or timeout
+2. Select a center
+3. Verify error handling,Timeout error is displayed. User is notified of the issue. Retry option is available
+TC-073,Edge Case - Empty Search Result,Verify behavior when search returns no results,User performs search with no matches,User searches for non-existent customer,1. Select a center
+2. Enter search text that matches no customers
+3. Execute search
+4. Verify empty state,Empty state is displayed. Message indicates no results found. User can clear search to see all requests again
+TC-074,Edge Case - Special Characters in Search,Verify search handles special characters correctly,User enters special characters in search,User searches with special characters,1. Enter special characters in search field (e.g., <script>, @#$)
+2. Execute search
+3. Verify sanitization,Special characters are sanitized. XSS attacks are prevented. Search works correctly with sanitized input
+TC-075,Integration - Context Providers,Verify RequestProvider and CollectionProvider work correctly,User navigates to page,User views page,1. Navigate to LMS Requests page
+2. Verify contexts are available
+3. Verify data flows correctly,RequestProvider wraps the component. CollectionProvider data is accessible. Context data flows to child components correctly
+TC-076,Integration - Redux Store,Verify Redux store integration works correctly,User is logged in,User views page,1. Navigate to LMS Requests page
+2. Verify Redux state is accessed
+3. Verify orgId is retrieved correctly,orgId is retrieved from Redux store. Fallback to context or default '1' works. State updates correctly
+TC-077,Table Column Widths,Verify table columns have appropriate widths,User has requests displayed,User views table,1. View requests table
+2. Verify column widths
+3. Verify content fits,Columns have appropriate widths. Content is not truncated unnecessarily. Table is readable
+TC-078,Table Scroll - Horizontal,Verify table scrolls horizontally when needed,User has many columns or narrow screen,User views table,1. View table on narrow screen or with many columns
+2. Verify horizontal scroll works,Table scrolls horizontally when content exceeds width. Scrollbar appears. All columns remain accessible
+TC-079,Table Scroll - Vertical,Verify table scrolls vertically for many rows,User has many requests,User views table,1. View table with many requests (50+)
+2. Verify vertical scroll works,Table scrolls vertically. Scrollbar appears. All rows remain accessible. Header remains sticky at top
+TC-080,Sticky Header - Table,Verify table header remains sticky when scrolling,User has many requests,User scrolls table,1. View table with many requests
+2. Scroll down through requests
+3. Verify header remains visible,Table header remains sticky at top. Header is always visible when scrolling. Column names remain accessible
+TC-081,Toast Notifications - Success,Verify success toast appears after actions,User performs successful action,User completes action,1. Perform an action that triggers success (e.g., review approval)
+2. Verify toast notification,Success toast notification appears. Message is clear and informative. Toast disappears after timeout
+TC-082,Toast Notifications - Error,Verify error toast appears on errors,User encounters an error,Error occurs,1. Trigger an error condition (e.g., API failure)
+2. Verify error toast,Error toast notification appears. Error message is displayed. Toast is styled appropriately (red/error styling)
+TC-083,Data Refresh - After Modal Close,Verify table refreshes after modal closes,User reviews a request,User closes modal,1. Open review modal
+2. Approve or reject request
+3. Close modal
+4. Verify table refreshes,Table automatically refreshes after modal closes. Updated request status is reflected. Request moves to appropriate tab if status changed
+TC-084,Multi-Select - Center Validation,Verify multi-select center mode works correctly,User is in multi-select mode,User selects centers,1. Verify multi-select mode is active
+2. Select multiple centers
+3. Verify all selections are maintained,Multiple centers can be selected simultaneously. Selections persist when dropdown is open. "Done" button confirms selections
+TC-085,User Filter - Enable/Disable Logic,Verify user filter enable/disable logic works,User selects and deselects users,User changes user selection,1. Select specific users - verify filter enabled
+2. Deselect all users - verify filter disabled
+3. Select users again - verify filter enabled,User filter is enabled when users are selected. Filter is disabled when no users selected. Filtering works correctly based on enabled state
+TC-086,CollectionId - Context Preservation,Verify collectionId is preserved during initial load,User navigates with collectionId,User views page,1. Navigate with collectionId in context
+2. Verify collectionId is not cleared on initial center load
+3. Verify it's only cleared on manual center change,collectionId persists during initial automatic center selection. collectionId is only cleared when user manually changes center. Context logic works correctly
+TC-087,Center Merge - API Response,Verify centers from API response are merged with assigned centers,User navigates with collectionId,User views page,1. Navigate with collectionId
+2. Verify API returns centers
+3. Verify centers are merged with Redux assigned centers,Centers from API response are merged with existing assigned centers. No duplicates exist. All centers are available in dropdown
+TC-088,Request Data - Context Storage,Verify request data is stored in collectionContext for modals,User has requests loaded,User opens modal,1. Load requests
+2. Open review modal for a request
+3. Verify context has request data,Request data is stored in collectionContext. Modal can access request data from context. Data is properly formatted
+TC-089,Config Param - Recent Days,Verify recent days config param is fetched and used,User switches to approved/rejected tab,User views historical requests,1. Switch to Approved or Rejected tab
+2. Verify config param is fetched
+3. Verify tab subtitle shows correct days,Config param "COLLECTION_REQUEST_HISTORY_DAYS" is fetched on mount. Tab subtitle displays correct number of days. Default value (30) is used if config not available
+TC-090,Request Type Mapping - Modal Opening,Verify correct modal opens based on request type,User has different request types,User clicks Review,1. Locate Fine Waiver request - click Review
+2. Locate EMI Tenure request - click Review
+3. Locate EMI Reschedule request - click Review
+4. Locate Part Payment request - click Review,Correct modal opens for each request type. Fine Waiver opens FineWaiverChildModal. EMI Tenure opens EmiTenureChildModal. EMI Reschedule opens EmiRescheduleChildModal. Part Payment opens PartPaymentChildModal
+TC-091,Request Static Data - Modal Population,Verify requestStaticData is used to populate modals,User opens review modal,User views modal data,1. Open review modal for any request type
+2. Verify modal fields are populated
+3. Verify data comes from requestStaticData,Modal fields are populated with data from requestStaticData. Fallback to reqDetails/reviewDetails works if staticData not available. Data is correctly formatted
+TC-092,Customer Link - Mobile Parameter,Verify customer link includes correct mobile parameter,User clicks customer name link,User opens customer link,1. Locate a request with customer mobile
+2. Click on customer name link
+3. Verify URL contains mobile parameter,Customer360 page opens with correct mobile parameter in URL. Mobile number is URL encoded. Link opens in new tab
+TC-093,Loading Overlay - Z-Index,Verify loading overlay appears above all content,User triggers loading state,Loading overlay appears,1. Trigger loading state (select center, switch tab, etc.)
+2. Verify overlay covers all content
+3. Verify overlay is on top,Loading overlay has high z-index (z-[9999]). Overlay covers entire screen. No content is accessible during loading
+TC-094,Empty State - Icon Display,Verify empty state icon displays correctly,User sees empty state,User views empty state,1. Navigate to page without selecting center
+2. Verify empty state icon,Empty state icon is displayed (building icon). Icon is styled correctly (blue background, white icon). Icon is centered
+TC-095,Filter State - Persistence,Verify filter state persists during component lifecycle,User changes filters,User interacts with page,1. Select center and users
+2. Perform search
+3. Verify filters remain when switching tabs
+4. Verify filters remain when opening/closing modals,Filter state persists during tab switches. Filter state persists when modals open/close. Filters are maintained until user changes them
+TC-096,Request Count - Tab Display,Verify request counts are displayed correctly,User has requests in different tabs,User views tabs,1. View Pending tab - note request count
+2. View Approved tab - note request count
+3. View Rejected tab - note request count,Each tab shows correct number of requests. Counts match filtered results. Tab labels are clear
+TC-097,Request ID - Display Format,Verify request ID (collectionId) displays correctly,User has requests displayed,User views request IDs,1. View requests in table
+2. Locate ID column
+3. Verify ID format,Request IDs are displayed clearly. IDs are formatted consistently. "N/A" is shown if ID is missing
+TC-098,Customer Mobile - Display Format,Verify customer mobile displays correctly,User has requests with customer mobile,User views customer column,1. View requests in table
+2. Locate customer column
+3. Verify mobile number format,Mobile numbers are displayed below customer name. Format is readable. "N/A" is shown if mobile is missing
+TC-099,Request Comment - Display,Verify request comment displays in view mode,User views approved/rejected request,User opens details modal,1. Switch to Approved or Rejected tab
+2. Click Details button
+3. Verify request comment is displayed,Request comment (reqComment) is displayed in modal. Comment is readable. Formatting is preserved
+TC-100,Reviewer Comment - Display,Verify reviewer comment displays in view mode,User views approved/rejected request,User opens details modal,1. Switch to Approved or Rejected tab
+2. Click Details button
+3. Verify reviewer comment is displayed,Reviewer comment (reviewerComment) is displayed in modal. Comment is readable. Formatting is preserved. Comment is clearly labeled
+
