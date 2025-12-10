@@ -1,337 +1,647 @@
-Id,Title,Description,Preconditions,Scenario,Detailed Steps,Expected Result
-TC-001,Page Load - Initial State,Verify that the LMS Requests page loads correctly with all components visible,User is logged in and has access to LMS module,Page loads successfully,1. Navigate to LMS Requests page
-2. Wait for page to load completely
-3. Verify all components are rendered,Page loads successfully. CollectionBanner displays "LMS > Requests". LMSSearchFilter is visible. Empty state message "Select a Center" is displayed. No loading overlay is shown
-TC-002,Empty State Display - No Center Selected,Verify empty state is shown when no center is selected,User is on LMS Requests page,No center selected,1. Navigate to LMS Requests page
-2. Ensure no center is selected in the filter
-3. Observe the main content area,Empty state is displayed with icon, title "Select a Center", and subtitle "Please select a center from the filter above to view collection requests"
-TC-003,Center Dropdown - Open and Close,Verify center dropdown opens and closes correctly,User is on LMS Requests page,User interacts with center dropdown,1. Click on center dropdown button
-2. Verify dropdown opens
-3. Click outside dropdown or click close button
-4. Verify dropdown closes,Dropdown opens showing list of available centers. Dropdown closes when clicking outside or clicking close button
-TC-004,Center Selection - Single Center,Verify selecting a single center loads requests,User is on LMS Requests page with centers available,User selects one center,1. Click on center dropdown button
-2. Select a single center from the list
-3. Wait for requests to load
-4. Verify table appears,Selected center is displayed in dropdown button. Loading overlay appears briefly. CollectionRequestTable displays requests for selected center. Empty state disappears
-TC-005,Center Selection - Multiple Centers,Verify selecting multiple centers loads requests from all selected centers,User is on LMS Requests page with multiple centers available,User selects multiple centers,1. Click on center dropdown button
-2. Select first center
-3. Select second center (without closing dropdown)
-4. Select third center if available
-5. Click "Done" button
-6. Wait for requests to load,Multiple centers are selected. Dropdown shows "X selected" where X is number of centers. CollectionRequestTable displays requests from all selected centers combined
-TC-006,Center Selection - Select All Centers,Verify "Select All" option selects all available centers,User is on LMS Requests page with multiple centers available,User clicks Select All,1. Click on center dropdown button
-2. Click "Select All" option
-3. Verify all centers are selected
-4. Click "Done" button,All centers are selected. Dropdown shows total count of selected centers. Requests from all centers are displayed
-TC-007,Center Selection - Deselect Center,Verify deselecting a center updates the request list,User has multiple centers selected,User deselects a center,1. Open center dropdown
-2. Click on a selected center to deselect it
-3. Verify at least one center remains selected
-4. Click "Done" button
-5. Wait for requests to reload,Deselected center is removed from selection. At least one center remains selected (minimum requirement). Request list updates to show requests from remaining selected centers
-TC-008,Center Selection - Minimum One Center Required,Verify that at least one center must always be selected,User has one center selected,User tries to deselect the last center,1. Open center dropdown
-2. Try to deselect the only selected center
-3. Verify center remains selected,Last center cannot be deselected. Center remains selected. Visual indicator shows "(Required)" text. Cursor shows "not-allowed" on hover
-TC-009,User Dropdown - Open and Close,Verify user dropdown opens and closes correctly,User has selected at least one center,User interacts with user dropdown,1. Click on user dropdown button
-2. Verify dropdown opens showing roles panel
-3. Click outside dropdown
-4. Verify dropdown closes,User dropdown opens showing roles panel on left. Dropdown closes when clicking outside
-TC-010,User Dropdown - Role Expansion,Verify expanding a role shows users in that role,User has selected center and user dropdown is open,User expands a role,1. Click on user dropdown button
-2. Click on a role name (e.g., "FIELD", "SALES_EXEC")
-3. Verify users panel appears on right
-4. Verify users in that role are displayed,Role is highlighted. Users panel appears on right side showing all users in that role. Users are displayed with name and mobile number
-TC-011,User Selection - Single User,Verify selecting a single user filters requests,User has expanded a role,User selects one user,1. Expand a role in user dropdown
-2. Click on a user to select
-3. Close user dropdown
-4. Verify requests are filtered,User is selected (checkbox checked). Dropdown button shows selected user name. Request table filters to show only requests requested by that user
-TC-012,User Selection - Multiple Users,Verify selecting multiple users filters requests,User has expanded a role,User selects multiple users,1. Expand a role in user dropdown
-2. Select first user
-3. Select second user
-4. Select third user
-5. Close user dropdown
-6. Verify requests are filtered,Multiple users are selected. Dropdown button shows "X selected" where X is number of users. Request table filters to show requests requested by any of the selected users
-TC-013,User Selection - Select All Users,Verify "Select All" option selects all users,User has selected center,User clicks Select All,1. Click on user dropdown button
-2. Click "Select All" option
-3. Verify all users are selected
-4. Close dropdown,All users including "Unassigned" (if enabled) are selected. Dropdown shows total count. Request table shows all requests (no filtering applied)
-TC-014,User Selection - Select All in Role,Verify selecting all users in a specific role,User has expanded a role,User clicks "All in Role",1. Expand a role in user dropdown
-2. Click "All in [Role Name]" option
-3. Verify all users in that role are selected,All users in the expanded role are selected. Checkbox next to "All in [Role Name]" is checked. Request table filters accordingly
-TC-015,User Selection - Unassigned Option,Verify selecting "Unassigned" option works correctly,User has selected center and Unassigned option is enabled,User selects Unassigned,1. Click on user dropdown button
-2. Click on "Unassigned" option
-3. Verify it is selected
-4. Close dropdown,Unassigned option is highlighted. Checkmark appears. Dropdown shows "Unassigned" when only this option is selected
-TC-016,User Selection - Minimum One User Required,Verify that at least one user must always be selected,User has one user selected,User tries to deselect the last user,1. Open user dropdown
-2. Try to deselect the only selected user
-3. Verify user remains selected,Last user cannot be deselected. User remains selected. Minimum one user requirement is enforced
-TC-017,Search Functionality - Basic Search,Verify search input filters requests by customer name or mobile,User has selected center and requests are loaded,User performs search,1. Enter customer name or mobile number in search input
-2. Click search button or press Enter
-3. Verify requests are filtered,Search input accepts text. Requests are filtered to show only matching customers (by name or mobile). Table updates to show filtered results
-TC-018,Search Functionality - Search with Enter Key,Verify search works when pressing Enter key,User has selected center and requests are loaded,User presses Enter in search field,1. Enter search text in search input
-2. Press Enter key
-3. Verify search is executed,Search is executed automatically. Requests are filtered. No need to click search button
-TC-019,Search Functionality - Clear Search,Verify clearing search shows all requests again,User has performed a search,User clears search,1. Enter search text and execute search
-2. Clear the search input field
-3. Click search button or press Enter
-4. Verify all requests are shown again,Search input is cleared. All requests matching center/user filters are displayed again
-TC-020,Search Functionality - Search Precedence,Verify search text takes precedence over context customer name,User navigates from action menu with collectionId and customerInfo,User performs search,1. Navigate to page with collectionId and customerInfo in context
-2. Enter different search text
-3. Execute search
-4. Verify search text is used,Search text is used for filtering instead of context customerInfo. Requests are filtered by search text
-TC-021,Table Display - Pending Tab,Verify pending requests are displayed correctly,User has selected center and requests are loaded,User views pending tab,1. Select a center
-2. Wait for requests to load
-3. Verify "Pending" tab is active by default
-4. Verify pending requests are displayed,Pending tab is highlighted. Table displays only pending requests. Each request shows collectionId, customer name, request type, status, requested by, submitted date, and Review button
-TC-022,Table Display - Approved Tab,Verify approved requests are displayed correctly,User has selected center,User switches to approved tab,1. Select a center
-2. Click on "Approved" tab
-3. Wait for requests to load
-4. Verify approved requests are displayed,Approved tab is highlighted. Tab shows "Last X Days" subtitle. Table displays only approved requests from last X days (default 30). Each request shows Details button instead of Review
-TC-023,Table Display - Rejected Tab,Verify rejected requests are displayed correctly,User has selected center,User switches to rejected tab,1. Select a center
-2. Click on "Rejected" tab
-3. Wait for requests to load
-4. Verify rejected requests are displayed,Rejected tab is highlighted. Tab shows "Last X Days" subtitle. Table displays only rejected requests from last X days (default 30). Each request shows Details button
-TC-024,Table Sorting - Collection ID Column,Verify sorting by Collection ID column works,User has requests displayed in table,User clicks Collection ID header,1. Click on "ID" column header
-2. Verify requests are sorted ascending
-3. Click again to sort descending
-4. Verify sort order changes,First click sorts ascending (↑ indicator). Second click sorts descending (↓ indicator). Requests are reordered accordingly
-TC-025,Table Sorting - Customer Column,Verify sorting by Customer column works,User has requests displayed in table,User clicks Customer header,1. Click on "Customer" column header
-2. Verify requests are sorted by customer name
-3. Click again to reverse sort order,Requests are sorted alphabetically by customer name. Sort indicator shows current direction. Clicking again reverses the order
-TC-026,Table Sorting - Request Type Column,Verify sorting by Request Type column works,User has requests displayed in table,User clicks Request Type header,1. Click on "Request Type" column header
-2. Verify requests are sorted by request type
-3. Verify sort indicator appears,Requests are sorted by request type name. Sort indicator (↕) appears on header
-TC-027,Table Sorting - Status Column,Verify sorting by Status column works,User has requests displayed in table,User clicks Status header,1. Click on "Status" column header
-2. Verify requests are sorted by status
-3. Verify sort indicator appears,Requests are sorted by status (APPROVED, PENDING, REJECTED). Sort indicator appears
-TC-028,Table Sorting - Request By Column,Verify sorting by Request By column works,User has requests displayed in table,User clicks Request By header,1. Click on "Request By" column header
-2. Verify requests are sorted by requester name
-3. Verify sort indicator appears,Requests are sorted alphabetically by requester name. Sort indicator appears
-TC-029,Table Sorting - Submitted On Column,Verify sorting by Submitted On column works,User has requests displayed in table,User clicks Submitted On header,1. Click on "Submitted On" column header
-2. Verify requests are sorted by date
-3. Click again to reverse order,Requests are sorted by submission date. First click sorts oldest first, second click sorts newest first
-TC-030,Review Button - Pending Request,Verify Review button opens appropriate modal for pending request,User has pending requests displayed,User clicks Review button,1. Locate a pending request in the table
-2. Click "Review" button
-3. Verify modal opens,Review button is visible and clickable. Appropriate modal opens based on request type (Fine Waiver, EMI Tenure, EMI Reschedule, or Part Payment). Modal displays request details in review mode
-TC-031,Details Button - Approved Request,Verify Details button opens view-only modal for approved request,User has approved requests displayed,User clicks Details button,1. Switch to "Approved" tab
-2. Locate an approved request
-3. Click "Details" button
-4. Verify modal opens in view mode,Details button is visible and clickable. Modal opens in view mode (read-only). Modal displays review details and reviewer comment
-TC-032,Details Button - Rejected Request,Verify Details button opens view-only modal for rejected request,User has rejected requests displayed,User clicks Details button,1. Switch to "Rejected" tab
-2. Locate a rejected request
-3. Click "Details" button
-4. Verify modal opens in view mode,Details button is visible and clickable. Modal opens in view mode (read-only). Modal displays rejection reason and reviewer comment
-TC-033,Modal - Fine Waiver Request,Verify Fine Waiver modal opens with correct data,User has a Fine Waiver pending request,User clicks Review button,1. Locate a Fine Waiver request
-2. Click "Review" button
-3. Verify Fine Waiver modal opens
-4. Verify modal displays fine amount and customer details,Fine Waiver modal opens. Modal displays actual fine amount from requestStaticData. Customer information is populated correctly
-TC-034,Modal - EMI Tenure Change Request,Verify EMI Tenure Change modal opens with correct data,User has an EMI Tenure Change pending request,User clicks Review button,1. Locate an EMI Tenure Change request
-2. Click "Review" button
-3. Verify EMI Tenure Change modal opens
-4. Verify modal displays tenure details,EMI Tenure Change modal opens. Modal displays current EMI amount, total terms, completed terms, and EMI payment day. All data is populated from requestStaticData
-TC-035,Modal - EMI Reschedule Request,Verify EMI Reschedule modal opens with correct data,User has an EMI Reschedule pending request,User clicks Review button,1. Locate an EMI Reschedule request
-2. Click "Review" button
-3. Verify EMI Reschedule modal opens
-4. Verify modal displays EMI details,EMI Reschedule modal opens. Modal displays EMI amount, current EMI day, new EMI day, and due date. Data is populated correctly
-TC-036,Modal - Part Payment Request,Verify Part Payment modal opens with correct data,User has a Part Payment pending request,User clicks Review button,1. Locate a Part Payment request
-2. Click "Review" button
-3. Verify Part Payment modal opens
-4. Verify modal displays payment details,Part Payment modal opens. Modal displays pending amount, first part amount, second part amount, and second part date. Data is populated correctly
-TC-037,Loading State - Initial Load,Verify loading overlay appears during initial request fetch,User selects a center for the first time,User selects center,1. Navigate to LMS Requests page
-2. Select a center
-3. Observe loading state,Loading overlay appears with spinner and message "Loading collection requests...". Overlay covers entire screen. Table is not visible during loading
-TC-038,Loading State - Tab Switch,Verify loading overlay appears when switching tabs,User has requests loaded,User switches tab,1. Select a center and wait for requests to load
-2. Click on "Approved" tab
-3. Observe loading state,Loading overlay appears briefly. Requests are fetched for the new tab. Overlay disappears when data is loaded
-TC-039,Loading State - Filter Change,Verify loading state appears when filters change,User has requests loaded,User changes filter,1. Select a center and wait for requests to load
-2. Change center selection
-3. Observe loading state,Loading overlay appears. Requests are refetched with new filters. Overlay disappears when new data is loaded
-TC-040,Error State - API Error,Verify error message is displayed when API fails,User selects a center but API returns error,API call fails,1. Select a center
-2. Simulate API error (network failure or server error)
-3. Verify error is displayed,Error message is displayed in table area. Toast notification shows error message. User can retry by changing filters
-TC-041,Empty State - No Requests Found,Verify empty state is shown when no requests match filters,User has selected center but no requests exist,No requests match current filters,1. Select a center
-2. Wait for API response
-3. Verify empty state is displayed,Empty state message "No collection requests found" is displayed. Table is not shown. User can change filters to find requests
-TC-042,Empty State - User Filter No Match,Verify empty state when user filter returns no results,User has selected center and users,User filter returns no matches,1. Select a center
-2. Select specific users
-3. Verify if no requests match selected users,Empty state is displayed if no requests match selected users. Message indicates no requests found
-TC-043,Context Integration - CollectionId Navigation,Verify page loads correctly when navigated with collectionId,User navigates from action menu with collectionId,User arrives with collectionId,1. Navigate from action menu with collectionId in context
-2. Verify page loads
-3. Verify requests are loaded for that collection,Page loads successfully. CollectionRequestTable receives collectionId prop. Requests for that specific collection are displayed. Center dropdown shows centers from API response
-TC-044,Context Integration - CollectionId Persistence,Verify collectionId persists until user changes center,User arrives with collectionId,User changes center selection,1. Navigate with collectionId
-2. Verify requests load for that collection
-3. Change center selection manually
-4. Verify collectionId is cleared,Initial load uses collectionId. When user manually changes center, collectionId is cleared from context. Requests are fetched using new center selection
-TC-045,Context Integration - Center Info Update,Verify center information is updated in context when center is selected,User selects a center,User selects center from dropdown,1. Select a center from dropdown
-2. Verify context is updated
-3. Check if centerId, centerIds, centerName, centerNames are set,Context is updated with selected center information. centerId contains primary center ID. centerIds contains all selected center IDs. centerName and centerNames are populated
-TC-046,Filter Integration - Center and User Combined,Verify filtering works when both center and user are selected,User has multiple centers and users available,User selects center and user,1. Select multiple centers
-2. Select specific users
-3. Verify requests are filtered,Requests are filtered to show only requests from selected centers AND requested by selected users. Filtering is applied correctly
-TC-047,Filter Integration - Center User and Search Combined,Verify filtering works with all filters combined,User has selected center and user,User adds search text,1. Select center(s)
-2. Select user(s)
-3. Enter search text
-4. Execute search
-5. Verify requests are filtered,Requests are filtered by center, user, AND search text. All filters are applied simultaneously. Only matching requests are displayed
-TC-048,Table Row - Customer Name Link,Verify customer name link opens Customer360 page,User has requests displayed,User clicks customer name link,1. Locate a request with customer name
-2. Click on customer name link
-3. Verify new tab opens,Link opens Customer360 page in new tab. URL contains customer mobile number. Original page remains open
-TC-049,Table Row - Hover Effect,Verify table row has hover effect,User has requests displayed,User hovers over table row,1. Hover mouse over a table row
-2. Verify visual feedback,Row background changes color on hover. Row scales slightly (scale-[1.01]). Shadow effect appears
-TC-050,Responsive Design - Mobile View,Verify page is responsive on mobile devices,User accesses page on mobile device,User views page on mobile,1. Open page on mobile device or resize browser to mobile width
-2. Verify layout adapts
-3. Verify all components are accessible,Layout adapts to mobile screen. Components stack vertically if needed. Dropdowns are accessible. Table is scrollable horizontally if needed
-TC-051,Recent Days Configuration,Verify recent days configuration is fetched and used,User switches to Approved or Rejected tab,User views approved/rejected requests,1. Select a center
-2. Click on "Approved" or "Rejected" tab
-3. Verify recent days is fetched from config
-4. Verify tab subtitle shows correct days,Config param "COLLECTION_REQUEST_HISTORY_DAYS" is fetched. Tab subtitle shows "Last X Days" where X is from config. Default is 30 if config not available
-TC-052,Concurrent API Calls Prevention,Verify multiple API calls are not made simultaneously,User rapidly changes filters,User changes filters quickly,1. Select a center
-2. Quickly change to another center
-3. Quickly change to third center
-4. Verify only one API call is in progress,Only one API call is executed at a time. Previous calls are cancelled or queued. Loading state is managed correctly
-TC-053,Component Unmount - Cleanup,Verify context is cleaned up on component unmount,User navigates away from page,User leaves LMS Requests page,1. Navigate to LMS Requests page
-2. Select a center
-3. Navigate away from page
-4. Verify cleanup occurs,centerId is cleared from context on unmount. No memory leaks. Context state is reset
-TC-054,Data Test IDs - All Elements,Verify all interactive elements have data-testid attributes,User is on LMS Requests page,User inspects elements,1. Open browser DevTools
-2. Inspect various elements (buttons, inputs, dropdowns, table rows)
-3. Verify data-testid attributes exist,All interactive elements have data-testid attributes. Test IDs follow naming conventions. Elements are testable with Playwright
-TC-055,Banner Component - Display,Verify CollectionBanner displays correctly,User is on LMS Requests page,User views banner,1. Navigate to LMS Requests page
-2. Verify banner is displayed
-3. Verify heading and subheading,Banner displays "LMS > Requests" with arrow icon. Heading is bold and properly styled. Banner is positioned correctly
-TC-056,Filter Reset - Center Change Clears Users,Verify changing center clears user selection,User has selected center and users,User changes center,1. Select a center
-2. Select specific users
-3. Change center selection
-4. Verify user selection is cleared,User selection is cleared when center changes. New users are fetched for new center. User dropdown updates with new user list
-TC-057,Filter Reset - Multiple Centers User Fetch,Verify users are fetched for all selected centers,User selects multiple centers,User selects multiple centers,1. Select first center
-2. Select second center
-3. Select third center
-4. Verify users are fetched for all centers,Users from all selected centers are fetched and combined. User dropdown shows users from all selected centers. Duplicate users are handled correctly
-TC-058,Table Pagination - Large Dataset,Verify table handles large number of requests,User has center with many requests,User views requests,1. Select a center with many requests (100+)
-2. Verify table displays all requests
-3. Verify scrolling works,All requests are displayed in table. Table is scrollable. Performance is acceptable. No lag or freezing
-TC-059,Modal Close - After Review,Verify modal closes after successful review,User reviews a pending request,User approves/rejects request,1. Click Review button on pending request
-2. Fill review form
-3. Submit review (approve or reject)
-4. Verify modal closes,Modal closes after successful submission. Table refreshes to show updated request status. Success toast notification appears
-TC-060,Modal Close - Cancel Action,Verify modal closes when cancelled,User opens review modal,User cancels review,1. Click Review button
-2. Click close/cancel button in modal
-3. Verify modal closes,Modal closes without saving changes. Table remains unchanged. No data is submitted
-TC-061,Request Status Badge - Pending,Verify pending status badge displays correctly,User has pending requests,User views pending requests,1. View pending tab
-2. Locate a pending request
-3. Verify status badge,Status badge shows "PENDING" with yellow background. Badge is styled correctly (bg-yellow-100 text-yellow-800)
-TC-062,Request Status Badge - Approved,Verify approved status badge displays correctly,User has approved requests,User views approved requests,1. View approved tab
-2. Locate an approved request
-3. Verify status badge,Status badge shows "APPROVED" with green background. Badge is styled correctly (bg-green-100 text-green-800)
-TC-063,Request Status Badge - Rejected,Verify rejected status badge displays correctly,User has rejected requests,User views rejected requests,1. View rejected tab
-2. Locate a rejected request
-3. Verify status badge,Status badge shows "REJECTED" with red background. Badge is styled correctly (bg-red-100 text-red-800)
-TC-064,Date Format - Submitted On,Verify date is formatted correctly in table,User has requests displayed,User views submitted dates,1. View requests in table
-2. Locate "Submitted On" column
-3. Verify date format,Dates are displayed in locale format (e.g., MM/DD/YYYY). Dates are readable and properly formatted
-TC-065,Accessibility - Keyboard Navigation,Verify page is accessible via keyboard,User navigates using keyboard only,User uses keyboard,1. Use Tab key to navigate through elements
-2. Use Enter/Space to activate buttons
-3. Use Arrow keys in dropdowns
-4. Verify all elements are accessible,All interactive elements are focusable. Keyboard navigation works correctly. Focus indicators are visible. Dropdowns can be navigated with keyboard
-TC-066,Accessibility - Screen Reader,Verify page is accessible to screen readers,User uses screen reader,User navigates with screen reader,1. Enable screen reader
-2. Navigate through page elements
-3. Verify all elements are announced,All elements have proper ARIA labels. Screen reader announces all content correctly. Interactive elements are properly described
-TC-067,Performance - Initial Load Time,Verify page loads within acceptable time,User navigates to page,User opens page,1. Navigate to LMS Requests page
-2. Measure time until page is interactive
-3. Verify performance metrics,Page loads within 3 seconds. All components render quickly. No blocking operations
-TC-068,Performance - Filter Response Time,Verify filters respond quickly,User changes filters,User changes filter selection,1. Select a center
-2. Change user selection
-3. Measure response time
-4. Verify performance,Filter changes respond within 1 second. Table updates quickly. No noticeable lag
-TC-069,Edge Case - No Centers Available,Verify behavior when no centers are assigned,User has no assigned centers,User views page,1. Login as user with no assigned centers
-2. Navigate to LMS Requests page
-3. Verify behavior,Center dropdown shows "No centers available" message. Empty state is displayed. User cannot proceed without centers
-TC-070,Edge Case - No Users Available,Verify behavior when no users are available for selected center,User selects center with no users,User selects center,1. Select a center that has no users mapped
-2. Verify user dropdown behavior,User dropdown shows "No users found" message. User selection is empty. Requests may still load if not filtered by user
-TC-071,Edge Case - Invalid CollectionId,Verify behavior when invalid collectionId is provided,User navigates with invalid collectionId,User arrives with invalid collectionId,1. Navigate with invalid/non-existent collectionId
-2. Verify error handling,Error message is displayed. Empty state or error state is shown. User can select center to proceed
-TC-072,Edge Case - Network Timeout,Verify behavior when API call times out,User selects center but network is slow,API call times out,1. Simulate slow network or timeout
-2. Select a center
-3. Verify error handling,Timeout error is displayed. User is notified of the issue. Retry option is available
-TC-073,Edge Case - Empty Search Result,Verify behavior when search returns no results,User performs search with no matches,User searches for non-existent customer,1. Select a center
-2. Enter search text that matches no customers
-3. Execute search
-4. Verify empty state,Empty state is displayed. Message indicates no results found. User can clear search to see all requests again
-TC-074,Edge Case - Special Characters in Search,Verify search handles special characters correctly,User enters special characters in search,User searches with special characters,1. Enter special characters in search field (e.g., <script>, @#$)
-2. Execute search
-3. Verify sanitization,Special characters are sanitized. XSS attacks are prevented. Search works correctly with sanitized input
-TC-075,Integration - Context Providers,Verify RequestProvider and CollectionProvider work correctly,User navigates to page,User views page,1. Navigate to LMS Requests page
-2. Verify contexts are available
-3. Verify data flows correctly,RequestProvider wraps the component. CollectionProvider data is accessible. Context data flows to child components correctly
-TC-076,Integration - Redux Store,Verify Redux store integration works correctly,User is logged in,User views page,1. Navigate to LMS Requests page
-2. Verify Redux state is accessed
-3. Verify orgId is retrieved correctly,orgId is retrieved from Redux store. Fallback to context or default '1' works. State updates correctly
-TC-077,Table Column Widths,Verify table columns have appropriate widths,User has requests displayed,User views table,1. View requests table
-2. Verify column widths
-3. Verify content fits,Columns have appropriate widths. Content is not truncated unnecessarily. Table is readable
-TC-078,Table Scroll - Horizontal,Verify table scrolls horizontally when needed,User has many columns or narrow screen,User views table,1. View table on narrow screen or with many columns
-2. Verify horizontal scroll works,Table scrolls horizontally when content exceeds width. Scrollbar appears. All columns remain accessible
-TC-079,Table Scroll - Vertical,Verify table scrolls vertically for many rows,User has many requests,User views table,1. View table with many requests (50+)
-2. Verify vertical scroll works,Table scrolls vertically. Scrollbar appears. All rows remain accessible. Header remains sticky at top
-TC-080,Sticky Header - Table,Verify table header remains sticky when scrolling,User has many requests,User scrolls table,1. View table with many requests
-2. Scroll down through requests
-3. Verify header remains visible,Table header remains sticky at top. Header is always visible when scrolling. Column names remain accessible
-TC-081,Toast Notifications - Success,Verify success toast appears after actions,User performs successful action,User completes action,1. Perform an action that triggers success (e.g., review approval)
-2. Verify toast notification,Success toast notification appears. Message is clear and informative. Toast disappears after timeout
-TC-082,Toast Notifications - Error,Verify error toast appears on errors,User encounters an error,Error occurs,1. Trigger an error condition (e.g., API failure)
-2. Verify error toast,Error toast notification appears. Error message is displayed. Toast is styled appropriately (red/error styling)
-TC-083,Data Refresh - After Modal Close,Verify table refreshes after modal closes,User reviews a request,User closes modal,1. Open review modal
-2. Approve or reject request
-3. Close modal
-4. Verify table refreshes,Table automatically refreshes after modal closes. Updated request status is reflected. Request moves to appropriate tab if status changed
-TC-084,Multi-Select - Center Validation,Verify multi-select center mode works correctly,User is in multi-select mode,User selects centers,1. Verify multi-select mode is active
-2. Select multiple centers
-3. Verify all selections are maintained,Multiple centers can be selected simultaneously. Selections persist when dropdown is open. "Done" button confirms selections
-TC-085,User Filter - Enable/Disable Logic,Verify user filter enable/disable logic works,User selects and deselects users,User changes user selection,1. Select specific users - verify filter enabled
-2. Deselect all users - verify filter disabled
-3. Select users again - verify filter enabled,User filter is enabled when users are selected. Filter is disabled when no users selected. Filtering works correctly based on enabled state
-TC-086,CollectionId - Context Preservation,Verify collectionId is preserved during initial load,User navigates with collectionId,User views page,1. Navigate with collectionId in context
-2. Verify collectionId is not cleared on initial center load
-3. Verify it's only cleared on manual center change,collectionId persists during initial automatic center selection. collectionId is only cleared when user manually changes center. Context logic works correctly
-TC-087,Center Merge - API Response,Verify centers from API response are merged with assigned centers,User navigates with collectionId,User views page,1. Navigate with collectionId
-2. Verify API returns centers
-3. Verify centers are merged with Redux assigned centers,Centers from API response are merged with existing assigned centers. No duplicates exist. All centers are available in dropdown
-TC-088,Request Data - Context Storage,Verify request data is stored in collectionContext for modals,User has requests loaded,User opens modal,1. Load requests
-2. Open review modal for a request
-3. Verify context has request data,Request data is stored in collectionContext. Modal can access request data from context. Data is properly formatted
-TC-089,Config Param - Recent Days,Verify recent days config param is fetched and used,User switches to approved/rejected tab,User views historical requests,1. Switch to Approved or Rejected tab
-2. Verify config param is fetched
-3. Verify tab subtitle shows correct days,Config param "COLLECTION_REQUEST_HISTORY_DAYS" is fetched on mount. Tab subtitle displays correct number of days. Default value (30) is used if config not available
-TC-090,Request Type Mapping - Modal Opening,Verify correct modal opens based on request type,User has different request types,User clicks Review,1. Locate Fine Waiver request - click Review
-2. Locate EMI Tenure request - click Review
-3. Locate EMI Reschedule request - click Review
-4. Locate Part Payment request - click Review,Correct modal opens for each request type. Fine Waiver opens FineWaiverChildModal. EMI Tenure opens EmiTenureChildModal. EMI Reschedule opens EmiRescheduleChildModal. Part Payment opens PartPaymentChildModal
-TC-091,Request Static Data - Modal Population,Verify requestStaticData is used to populate modals,User opens review modal,User views modal data,1. Open review modal for any request type
-2. Verify modal fields are populated
-3. Verify data comes from requestStaticData,Modal fields are populated with data from requestStaticData. Fallback to reqDetails/reviewDetails works if staticData not available. Data is correctly formatted
-TC-092,Customer Link - Mobile Parameter,Verify customer link includes correct mobile parameter,User clicks customer name link,User opens customer link,1. Locate a request with customer mobile
-2. Click on customer name link
-3. Verify URL contains mobile parameter,Customer360 page opens with correct mobile parameter in URL. Mobile number is URL encoded. Link opens in new tab
-TC-093,Loading Overlay - Z-Index,Verify loading overlay appears above all content,User triggers loading state,Loading overlay appears,1. Trigger loading state (select center, switch tab, etc.)
-2. Verify overlay covers all content
-3. Verify overlay is on top,Loading overlay has high z-index (z-[9999]). Overlay covers entire screen. No content is accessible during loading
-TC-094,Empty State - Icon Display,Verify empty state icon displays correctly,User sees empty state,User views empty state,1. Navigate to page without selecting center
-2. Verify empty state icon,Empty state icon is displayed (building icon). Icon is styled correctly (blue background, white icon). Icon is centered
-TC-095,Filter State - Persistence,Verify filter state persists during component lifecycle,User changes filters,User interacts with page,1. Select center and users
-2. Perform search
-3. Verify filters remain when switching tabs
-4. Verify filters remain when opening/closing modals,Filter state persists during tab switches. Filter state persists when modals open/close. Filters are maintained until user changes them
-TC-096,Request Count - Tab Display,Verify request counts are displayed correctly,User has requests in different tabs,User views tabs,1. View Pending tab - note request count
-2. View Approved tab - note request count
-3. View Rejected tab - note request count,Each tab shows correct number of requests. Counts match filtered results. Tab labels are clear
-TC-097,Request ID - Display Format,Verify request ID (collectionId) displays correctly,User has requests displayed,User views request IDs,1. View requests in table
-2. Locate ID column
-3. Verify ID format,Request IDs are displayed clearly. IDs are formatted consistently. "N/A" is shown if ID is missing
-TC-098,Customer Mobile - Display Format,Verify customer mobile displays correctly,User has requests with customer mobile,User views customer column,1. View requests in table
-2. Locate customer column
-3. Verify mobile number format,Mobile numbers are displayed below customer name. Format is readable. "N/A" is shown if mobile is missing
-TC-099,Request Comment - Display,Verify request comment displays in view mode,User views approved/rejected request,User opens details modal,1. Switch to Approved or Rejected tab
-2. Click Details button
-3. Verify request comment is displayed,Request comment (reqComment) is displayed in modal. Comment is readable. Formatting is preserved
-TC-100,Reviewer Comment - Display,Verify reviewer comment displays in view mode,User views approved/rejected request,User opens details modal,1. Switch to Approved or Rejected tab
-2. Click Details button
-3. Verify reviewer comment is displayed,Reviewer comment (reviewerComment) is displayed in modal. Comment is readable. Formatting is preserved. Comment is clearly labeled
-
+Id,Title,Description,Preconditions,Scenario,Test Type,Detailed Steps,Expected Result
+LMS-REQ-001,Navigate to LMS Requests page successfully and verify all page components load correctly.,Validate that a logged-in user can successfully navigate to the LMS Requests page, and all required UI components (banner, filters, table container, empty state) load with correct testIds and are visible.,None,Positive,Navigation,"> Navigation to LMS Requests Page
+> Navigate to the LMS module landing page
+> Locate the Requests menu/tab
+> Click the Requests tab
+> Wait for the LMS Requests page to load fully (wait for 2000 ms)
+> Page Component Validation
+> Validate the root container is visible: page.getByTestId(""lms-requests-page"")
+> Validate the main wrapper is rendered: page.getByTestId(""lms-requests-main-wrapper"")
+> Validate the header section loads: page.getByTestId(""lms-requests-header"")
+> Validate header content: page.getByTestId(""lms-requests-header-content"")
+> Validate banner section: page.getByTestId(""lms-requests-banner"")
+> Validate collection banner component: page.getByTestId(""collection-banner"")
+> Validate banner heading: page.getByTestId(""collection-banner-heading"")
+> Verify banner heading text contains ""LMS"" and ""Requests""
+> Validate search filter wrapper: page.getByTestId(""lms-requests-filter-wrapper"")
+> Validate search filter component: page.getByTestId(""lms-search-filter"")
+> Validate main content area: page.getByTestId(""lms-requests-main-content"")
+> Validate content wrapper: page.getByTestId(""lms-requests-content-wrapper"")
+> Validate table section: page.getByTestId(""lms-requests-table-section"")
+> Empty State Validation
+> Verify empty state is displayed when no center is selected: page.getByTestId(""lms-requests-empty-state"")
+> Verify empty state content: page.getByTestId(""lms-requests-empty-content"")
+> Verify empty state icon: page.getByTestId(""lms-requests-empty-icon"")
+> Verify empty state title: page.getByTestId(""lms-requests-empty-title"")
+> Verify empty state title text is ""Select a Center""
+> Verify empty state subtitle: page.getByTestId(""lms-requests-empty-subtitle"")
+> Verify empty state subtitle text contains ""Please select a center""",User navigates to LMS → Requests successfully. Page loads with banner showing ""LMS > Requests"", search filter component, empty state message ""Select a Center"", and all required testIds are present. No UI breaks or missing components.
+LMS-REQ-002,Verify Collection Banner displays correct heading and subheading text.,Validate that the CollectionBanner component displays the correct heading ""LMS"" and subheading ""Requests"" with proper formatting and arrow separator.,LMS-REQ-001,Positive,UI,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Validate banner component: page.getByTestId(""collection-banner"")
+> Validate banner heading element: page.getByTestId(""collection-banner-heading"")
+> Verify heading text contains ""LMS""
+> Verify heading text contains ""Requests""
+> Verify arrow icon is displayed between heading and subheading
+> Verify banner is visible and properly styled",CollectionBanner displays ""LMS > Requests"" correctly. Heading and subheading are visible with arrow separator icon. Banner is properly styled and positioned in the header section.
+LMS-REQ-003,Verify empty state displays correctly when no center is selected.,Validate that the empty state component displays with correct icon, title, and subtitle when no center has been selected from the filter dropdown.,LMS-REQ-001,Positive,UI,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Verify empty state container: page.getByTestId(""lms-requests-empty-state"")
+> Verify empty state is visible
+> Verify empty state content wrapper: page.getByTestId(""lms-requests-empty-content"")
+> Verify empty state icon: page.getByTestId(""lms-requests-empty-icon"")
+> Verify icon is visible and properly styled
+> Verify empty state title: page.getByTestId(""lms-requests-empty-title"")
+> Verify title text equals ""Select a Center""
+> Verify empty state subtitle: page.getByTestId(""lms-requests-empty-subtitle"")
+> Verify subtitle text contains ""Please select a center from the filter above to view collection requests""
+> Verify table component is not visible",Empty state displays correctly with building icon, title ""Select a Center"", and subtitle message. Empty state is centered and properly styled. Table component is not rendered when no center is selected.
+LMS-REQ-004,Verify center dropdown opens and displays available centers.,Validate that clicking the center dropdown button opens the dropdown menu and displays the list of available centers with proper testIds.,LMS-REQ-001,Positive,Component,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Locate center dropdown button: page.getByTestId(""center-dropdown-button"")
+> Verify button is visible
+> Click center dropdown button
+> Wait for dropdown to open (wait for 500 ms)
+> Verify dropdown container: page.getByTestId(""lms-center-dropdown"")
+> Verify dropdown is visible
+> Verify dropdown header: page.getByTestId(""lms-center-dropdown-header"")
+> Verify dropdown title: page.getByTestId(""lms-center-dropdown-title"")
+> Verify title text is ""Select Centers""
+> Verify dropdown content area: page.getByTestId(""lms-center-dropdown-content"")
+> Verify dropdown list: page.getByTestId(""lms-center-dropdown-list"")
+> Verify at least one center option is available: page.getByTestId(/lms-center-option-/)
+> Verify close button is visible: page.getByTestId(""close-center-dropdown-button"")
+> Verify done button is visible: page.getByTestId(""done-selecting-centers-button"")",Center dropdown opens successfully. Dropdown displays header with title ""Select Centers"", list of available centers, close button, and done button. All dropdown elements have correct testIds and are visible.
+LMS-REQ-005,Verify selecting a single center loads collection requests table.,Validate that selecting one center from the dropdown triggers API call, shows loading overlay, and displays the CollectionRequestTable component with requests data.,LMS-REQ-004,Positive,Functional,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Locate first center option: page.getByTestId(/lms-center-option-/).first()
+> Get center name from option: page.getByTestId(/lms-center-option-name-/).first().textContent()
+> Click first center option
+> Wait for loading overlay (wait for 1000 ms)
+> Verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Verify loading overlay content: page.getByTestId(""lms-requests-loading-overlay-content"")
+> Verify loading spinner: page.getByTestId(""lms-requests-loading-overlay-spinner"")
+> Verify loading message: page.getByTestId(""lms-requests-loading-overlay-message"")
+> Verify message text is ""Loading collection requests...""
+> Wait for table to load (wait for 3000 ms)
+> Verify loading overlay disappears
+> Verify empty state disappears: page.getByTestId(""lms-requests-empty-state"").shouldNotBeVisible()
+> Verify table component appears: page.getByTestId(""lms-collection-request-table"")
+> Verify table is visible
+> Verify center dropdown label shows selected center name: page.getByTestId(""lms-center-dropdown-label"")",Selecting a center triggers loading overlay with spinner and message. After API call completes, loading overlay disappears, empty state is hidden, and CollectionRequestTable component is displayed with requests data. Center dropdown shows selected center name.
+LMS-REQ-006,Verify selecting multiple centers loads requests from all selected centers.,Validate that selecting multiple centers from the dropdown maintains all selections and loads requests from all selected centers combined.,LMS-REQ-004,Positive,Functional,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Click first center option: page.getByTestId(/lms-center-option-/).first().click()
+> Wait for 500 ms
+> Click second center option: page.getByTestId(/lms-center-option-/).nth(1).click()
+> Wait for 500 ms
+> Verify both centers are selected (checkboxes are checked)
+> Click done button: page.getByTestId(""done-selecting-centers-button"").click()
+> Wait for loading overlay (wait for 1000 ms)
+> Verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Wait for table to load (wait for 3000 ms)
+> Verify loading overlay disappears
+> Verify table component appears: page.getByTestId(""lms-collection-request-table"")
+> Verify center dropdown label shows ""2 selected"": page.getByTestId(""lms-center-dropdown-label"")
+> Verify table displays requests from both selected centers",Multiple centers can be selected simultaneously. Dropdown shows ""X selected"" where X is the number of selected centers. Table displays requests from all selected centers combined. All selections are maintained.
+LMS-REQ-007,Verify Select All Centers option selects all available centers.,Validate that clicking ""Select All"" option in center dropdown selects all available centers and updates the selection count accordingly.,LMS-REQ-004,Positive,Functional,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Locate Select All option: page.getByTestId(""select-all-centers-option"")
+> Verify Select All label: page.getByTestId(""select-all-centers-label"")
+> Verify label text is ""Select All""
+> Click Select All option
+> Wait for 500 ms
+> Verify all center options are selected
+> Verify Select All option is highlighted
+> Click done button: page.getByTestId(""done-selecting-centers-button"").click()
+> Wait for table to load (wait for 3000 ms)
+> Verify center dropdown label shows total count of centers",Select All option selects all available centers. All center checkboxes are checked. Select All option is highlighted. Dropdown label shows total count of selected centers. Table loads requests from all centers.
+LMS-REQ-008,Verify minimum one center requirement prevents deselecting last center.,Validate that when only one center is selected, it cannot be deselected to maintain the minimum one center requirement.,LMS-REQ-005,Negative,Data Validation,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Select a single center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Locate the selected center option
+> Verify center option shows ""(Required)"" text
+> Verify center option has cursor-not-allowed class or disabled state
+> Attempt to click the selected center to deselect it
+> Verify center remains selected after click attempt
+> Verify checkbox remains checked",Last selected center cannot be deselected. Center option shows ""(Required)"" indicator. Center option has disabled/cursor-not-allowed styling. Clicking does not deselect the center. Minimum one center requirement is enforced.
+LMS-REQ-009,Verify user dropdown opens and displays roles panel.,Validate that clicking the user dropdown button opens the dropdown menu and displays the roles panel with available user roles.,LMS-REQ-005,Positive,Component,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate user dropdown button: page.getByTestId(""user-dropdown-button"")
+> Verify button is visible
+> Click user dropdown button
+> Wait for dropdown to open (wait for 500 ms)
+> Verify dropdown container: page.getByTestId(""lms-user-dropdown"")
+> Verify dropdown is visible
+> Verify roles panel: page.getByTestId(""lms-user-dropdown-roles-panel"")
+> Verify roles header: page.getByTestId(""lms-user-dropdown-roles-header"")
+> Verify roles title: page.getByTestId(""lms-user-dropdown-roles-title"")
+> Verify title text is ""ROLES""
+> Verify at least one role is displayed in the roles list",User dropdown opens successfully. Roles panel is displayed on the left side with header showing ""ROLES"". List of available roles is displayed. Dropdown is properly positioned and visible.
+LMS-REQ-010,Verify expanding a role displays users panel with users in that role.,Validate that clicking on a role name expands to show the users panel on the right side with all users belonging to that role.,LMS-REQ-009,Positive,Component,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Open user dropdown: page.getByTestId(""user-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Locate first role in roles list
+> Get role name from the role element
+> Click on the role name
+> Wait for users panel to appear (wait for 500 ms)
+> Verify users panel appears on the right side
+> Verify users panel header displays the role name
+> Verify users list is displayed
+> Verify at least one user is shown in the users panel
+> Verify each user displays name and mobile number",Clicking a role expands to show users panel on the right side. Users panel header displays the selected role name. List of users in that role is displayed with user names and mobile numbers. Users panel is properly positioned and visible.
+LMS-REQ-011,Verify selecting a user filters requests by that user.,Validate that selecting a specific user from the users panel filters the table to show only requests requested by that selected user.,LMS-REQ-010,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Open user dropdown: page.getByTestId(""user-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Expand a role (follow steps from LMS-REQ-010)
+> Locate first user in users panel
+> Get user name
+> Click on the user to select
+> Wait for 500 ms
+> Verify user checkbox is checked
+> Close user dropdown (click outside)
+> Wait for table to filter (wait for 2000 ms)
+> Verify table still visible: page.getByTestId(""lms-collection-request-table"")
+> Verify user dropdown label shows selected user name: page.getByTestId(""lms-user-dropdown-label"")
+> Verify table rows display only requests requested by selected user",Selecting a user checks the user checkbox. User dropdown label shows selected user name. Table filters to display only requests where requestedBy matches the selected user. Filtering works correctly.
+LMS-REQ-012,Verify selecting multiple users filters requests by any of the selected users.,Validate that selecting multiple users filters the table to show requests requested by any of the selected users (OR logic).,LMS-REQ-010,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Open user dropdown: page.getByTestId(""user-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Expand a role (follow steps from LMS-REQ-010)
+> Select first user
+> Wait for 500 ms
+> Select second user
+> Wait for 500 ms
+> Select third user
+> Wait for 500 ms
+> Verify all selected users have checked checkboxes
+> Close user dropdown (click outside)
+> Wait for table to filter (wait for 2000 ms)
+> Verify user dropdown label shows ""X selected"": page.getByTestId(""lms-user-dropdown-label"")
+> Verify table displays requests requested by any of the selected users",Multiple users can be selected. All selected users have checked checkboxes. User dropdown shows ""X selected"" where X is number of selected users. Table displays requests requested by any of the selected users (OR logic). Filtering works correctly.
+LMS-REQ-013,Verify Select All Users option selects all available users.,Validate that clicking ""Select All"" option in user dropdown selects all available users including Unassigned option if enabled.,LMS-REQ-009,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Open user dropdown: page.getByTestId(""user-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Locate Select All Users option in roles panel
+> Verify Select All option is visible
+> Click Select All Users option
+> Wait for 500 ms
+> Verify all users are selected (checkboxes checked)
+> Verify Unassigned option is selected if available
+> Verify Select All option is highlighted
+> Close user dropdown (click outside)
+> Wait for 500 ms
+> Verify user dropdown label shows total count",Select All Users option selects all available users. All user checkboxes are checked. Unassigned option is selected if enabled. Select All option is highlighted. User dropdown label shows total count of selected users.
+LMS-REQ-014,Verify search input accepts text and filters requests by customer name or mobile.,Validate that entering text in search input and clicking search button filters the table to show only requests matching the search term in customer name or mobile number.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate search input: page.getByTestId(""search-input"")
+> Verify search input is visible
+> Enter customer name or mobile in search input: page.getByTestId(""search-input"").fill(""test customer"")
+> Locate search button: page.getByTestId(""search-button"")
+> Click search button
+> Wait for table to filter (wait for 2000 ms)
+> Verify table still visible: page.getByTestId(""lms-collection-request-table"")
+> Verify table rows display only requests matching search term
+> Verify matching is done on customer name or mobile number",Search input accepts text input. Clicking search button triggers filtering. Table filters to show only requests where customer name or mobile number contains the search term. Filtering works correctly and updates table display.
+LMS-REQ-015,Verify search works with Enter key press.,Validate that pressing Enter key in search input triggers the search functionality without requiring button click.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate search input: page.getByTestId(""search-input"")
+> Enter search text: page.getByTestId(""search-input"").fill(""test"")
+> Press Enter key in search input
+> Wait for table to filter (wait for 2000 ms)
+> Verify table filters correctly
+> Verify search functionality works same as clicking button",Pressing Enter key in search input triggers search functionality. Table filters correctly without requiring button click. Enter key provides alternative way to execute search.
+LMS-REQ-016,Verify CollectionRequestTable displays with correct headers and columns.,Validate that the CollectionRequestTable component renders with all required column headers: ID, Customer, Request Type, Status, Request By, Submitted On, and Actions.,LMS-REQ-005,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify table component: page.getByTestId(""lms-collection-request-table"")
+> Verify table element: page.getByTestId(""lms-collection-request-table-table"")
+> Verify table header: page.getByTestId(""lms-collection-request-table-header"")
+> Verify header row contains columns: ID, Customer, Request Type, Status, Request By, Submitted On, Actions
+> Verify each header cell has testId: page.getByTestId(/lms-collection-request-table-header-/)
+> Verify sortable headers have sort indicator: page.getByTestId(/lms-collection-request-table-sort-indicator-/)
+> Verify table body: page.getByTestId(""lms-collection-request-table-body"")",CollectionRequestTable displays correctly with all required column headers. Headers are: ID, Customer, Request Type, Status, Request By, Submitted On, and Actions. Sortable columns have sort indicators. Table structure is correct.
+LMS-REQ-017,Verify table displays request rows with correct data.,Validate that the table displays request rows with data in all columns: collectionId, customer name/mobile, request type, status, requested by name, submitted date, and action buttons.,LMS-REQ-005,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify table body: page.getByTestId(""lms-collection-request-table-body"")
+> Verify at least one table row exists: page.getByTestId(/lms-collection-request-table-row-/)
+> Get first row: page.getByTestId(/lms-collection-request-table-row-/).first()
+> Verify row cells have testIds: page.getByTestId(/lms-collection-request-table-cell-collectionId-/)
+> Verify collectionId cell displays ID value
+> Verify customer cell displays customer name link: page.getByTestId(/customer-name-link-/)
+> Verify customer cell displays mobile number
+> Verify request type cell displays request type name
+> Verify status cell displays status badge (PENDING, APPROVED, or REJECTED)
+> Verify requested by cell displays requester name
+> Verify submitted on cell displays formatted date
+> Verify actions cell contains Review or Details button",Table displays request rows with correct data in all columns. Each row shows collectionId, customer name (as link) and mobile, request type, status badge, requester name, formatted submission date, and action button. Data is properly formatted and displayed.
+LMS-REQ-018,Verify Pending tab is active by default and displays pending requests.,Validate that the Pending tab is selected by default when table loads and displays only requests with status PENDING.,LMS-REQ-005,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab: page.getByTestId(""tab-pending"")
+> Verify Pending tab is visible
+> Verify Pending tab has active styling (teal-600 text and border)
+> Verify Pending tab text is ""Pending""
+> Verify Approved tab: page.getByTestId(""tab-approved"")
+> Verify Approved tab does not have active styling
+> Verify Rejected tab: page.getByTestId(""tab-rejected"")
+> Verify Rejected tab does not have active styling
+> Verify table displays only requests with status PENDING
+> Verify status badges show ""PENDING"" with yellow styling",Pending tab is active by default with teal-600 text and border styling. Tab text displays ""Pending"". Table displays only requests with PENDING status. Status badges show ""PENDING"" with yellow background. Other tabs are not active.
+LMS-REQ-019,Verify switching to Approved tab loads approved requests with recent days subtitle.,Validate that clicking Approved tab switches active tab, shows ""Last X Days"" subtitle, triggers API call, and displays approved requests from recent days.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate Approved tab: page.getByTestId(""tab-approved"")
+> Verify Approved tab is visible
+> Click Approved tab
+> Wait for loading overlay (wait for 1000 ms)
+> Verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Wait for table to load (wait for 3000 ms)
+> Verify loading overlay disappears
+> Verify Approved tab has active styling
+> Verify Approved tab subtitle: page.getByTestId(""tab-approved-subtitle"")
+> Verify subtitle text contains ""Last"" and ""Days""
+> Verify subtitle shows number of days (default 30)
+> Verify Pending tab does not have active styling
+> Verify table displays only requests with status APPROVED
+> Verify status badges show ""APPROVED"" with green styling",Clicking Approved tab switches active tab. Approved tab shows active styling with teal-600 text and border. Tab subtitle displays ""Last X Days"" where X is from config (default 30). Loading overlay appears during API call. Table displays only APPROVED requests. Status badges show ""APPROVED"" with green background.
+LMS-REQ-020,Verify switching to Rejected tab loads rejected requests with recent days subtitle.,Validate that clicking Rejected tab switches active tab, shows ""Last X Days"" subtitle, triggers API call, and displays rejected requests from recent days.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate Rejected tab: page.getByTestId(""tab-rejected"")
+> Verify Rejected tab is visible
+> Click Rejected tab
+> Wait for loading overlay (wait for 1000 ms)
+> Verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Wait for table to load (wait for 3000 ms)
+> Verify loading overlay disappears
+> Verify Rejected tab has active styling
+> Verify Rejected tab subtitle: page.getByTestId(""tab-rejected-subtitle"")
+> Verify subtitle text contains ""Last"" and ""Days""
+> Verify subtitle shows number of days (default 30)
+> Verify other tabs do not have active styling
+> Verify table displays only requests with status REJECTED
+> Verify status badges show ""REJECTED"" with red styling",Clicking Rejected tab switches active tab. Rejected tab shows active styling with teal-600 text and border. Tab subtitle displays ""Last X Days"" where X is from config (default 30). Loading overlay appears during API call. Table displays only REJECTED requests. Status badges show ""REJECTED"" with red background.
+LMS-REQ-021,Verify sorting by Collection ID column works correctly.,Validate that clicking the ID column header sorts requests by collectionId in ascending order, and clicking again sorts in descending order.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate ID column header: page.getByTestId(/lms-collection-request-table-sortable-header-.*collectionId/)
+> Verify header is clickable
+> Get first row ID before sorting
+> Click ID column header
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows ascending (↑): page.getByTestId(/lms-collection-request-table-sort-indicator-.*collectionId/)
+> Verify table rows are sorted by ID ascending
+> Get first row ID after sorting
+> Verify IDs are in ascending order
+> Click ID column header again
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows descending (↓)
+> Verify table rows are sorted by ID descending
+> Verify IDs are in descending order",Clicking ID column header sorts requests by collectionId ascending (↑ indicator). Clicking again sorts descending (↓ indicator). Table rows are reordered correctly. Sort indicator updates to show current sort direction.
+LMS-REQ-022,Verify sorting by Customer column works correctly.,Validate that clicking the Customer column header sorts requests by customer name alphabetically in ascending order, and clicking again sorts in descending order.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate Customer column header: page.getByTestId(/lms-collection-request-table-sortable-header-.*customer/)
+> Verify header is clickable
+> Get customer names from first few rows before sorting
+> Click Customer column header
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows ascending (↑)
+> Verify customer names are sorted alphabetically ascending
+> Click Customer column header again
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows descending (↓)
+> Verify customer names are sorted alphabetically descending",Clicking Customer column header sorts requests by customer name alphabetically ascending (↑ indicator). Clicking again sorts descending (↓ indicator). Table rows are reordered correctly. Customer names are properly sorted.
+LMS-REQ-023,Verify sorting by Submitted On column works correctly.,Validate that clicking the Submitted On column header sorts requests by submission date chronologically in ascending order, and clicking again sorts in descending order.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate Submitted On column header: page.getByTestId(/lms-collection-request-table-sortable-header-.*submittedOn/)
+> Verify header is clickable
+> Get submission dates from first few rows before sorting
+> Click Submitted On column header
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows ascending (↑)
+> Verify dates are sorted chronologically ascending (oldest first)
+> Click Submitted On column header again
+> Wait for table to sort (wait for 1000 ms)
+> Verify sort indicator shows descending (↓)
+> Verify dates are sorted chronologically descending (newest first)",Clicking Submitted On column header sorts requests by submission date ascending (oldest first, ↑ indicator). Clicking again sorts descending (newest first, ↓ indicator). Table rows are reordered correctly. Dates are properly sorted chronologically.
+LMS-REQ-024,Verify Review button opens appropriate modal for pending Fine Waiver request.,Validate that clicking Review button on a pending Fine Waiver request opens the FineWaiverChildModal in review mode with correct request data populated.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab is active
+> Locate a Fine Waiver request row
+> Get request ID from row: page.getByTestId(/lms-collection-request-table-row-/)
+> Locate Review button: page.getByTestId(/review-btn-/)
+> Verify Review button is visible and has yellow styling
+> Click Review button
+> Wait for modal to open (wait for 1000 ms)
+> Verify FineWaiverChildModal opens
+> Verify modal displays request details
+> Verify modal displays fine amount
+> Verify modal displays customer information
+> Verify modal is in review mode (editable)",Clicking Review button on Fine Waiver request opens FineWaiverChildModal. Modal displays request details including fine amount and customer information. Modal is in review mode allowing approval/rejection. Modal data is correctly populated from requestStaticData.
+LMS-REQ-025,Verify Review button opens appropriate modal for pending EMI Tenure Change request.,Validate that clicking Review button on a pending EMI Tenure Change request opens the EmiTenureChildModal in review mode with correct request data populated.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab is active
+> Locate an EMI Tenure Change request row
+> Locate Review button: page.getByTestId(/review-btn-/)
+> Verify Review button is visible
+> Click Review button
+> Wait for modal to open (wait for 1000 ms)
+> Verify EmiTenureChildModal opens
+> Verify modal displays request details
+> Verify modal displays current EMI amount, total terms, completed terms, EMI payment day
+> Verify modal displays customer information
+> Verify modal is in review mode",Clicking Review button on EMI Tenure Change request opens EmiTenureChildModal. Modal displays request details including current EMI amount, total terms, completed terms, and EMI payment day. Modal is in review mode. Modal data is correctly populated.
+LMS-REQ-026,Verify Review button opens appropriate modal for pending EMI Reschedule request.,Validate that clicking Review button on a pending EMI Reschedule request opens the EmiRescheduleChildModal in review mode with correct request data populated.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab is active
+> Locate an EMI Reschedule request row
+> Locate Review button: page.getByTestId(/review-btn-/)
+> Verify Review button is visible
+> Click Review button
+> Wait for modal to open (wait for 1000 ms)
+> Verify EmiRescheduleChildModal opens
+> Verify modal displays request details
+> Verify modal displays EMI amount, current EMI day, new EMI day, due date
+> Verify modal displays customer information
+> Verify modal is in review mode",Clicking Review button on EMI Reschedule request opens EmiRescheduleChildModal. Modal displays request details including EMI amount, current EMI day, new EMI day, and due date. Modal is in review mode. Modal data is correctly populated.
+LMS-REQ-027,Verify Review button opens appropriate modal for pending Part Payment request.,Validate that clicking Review button on a pending Part Payment request opens the PartPaymentChildModal in review mode with correct request data populated.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab is active
+> Locate a Part Payment request row
+> Locate Review button: page.getByTestId(/review-btn-/)
+> Verify Review button is visible
+> Click Review button
+> Wait for modal to open (wait for 1000 ms)
+> Verify PartPaymentChildModal opens
+> Verify modal displays request details
+> Verify modal displays pending amount, first part amount, second part amount, second part date
+> Verify modal displays customer information
+> Verify modal is in review mode",Clicking Review button on Part Payment request opens PartPaymentChildModal. Modal displays request details including pending amount, first part payment amount, second part payment amount, and second part payment date. Modal is in review mode. Modal data is correctly populated.
+LMS-REQ-028,Verify Details button opens view-only modal for approved request.,Validate that clicking Details button on an approved request opens the appropriate modal in view mode (read-only) displaying review details and reviewer comment.,LMS-REQ-019,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Switch to Approved tab (follow steps from LMS-REQ-019)
+> Wait for approved requests to load (wait for 3000 ms)
+> Locate an approved request row
+> Locate Details button: page.getByTestId(/details-btn-/)
+> Verify Details button is visible and has blue styling
+> Click Details button
+> Wait for modal to open (wait for 1000 ms)
+> Verify appropriate modal opens based on request type
+> Verify modal displays review details (not request details)
+> Verify modal displays reviewer comment
+> Verify modal is in view mode (read-only, not editable)",Clicking Details button on approved request opens appropriate modal in view mode. Modal displays review details and reviewer comment. Modal is read-only (not editable). Modal data is correctly populated from reviewDetails.
+LMS-REQ-029,Verify Details button opens view-only modal for rejected request.,Validate that clicking Details button on a rejected request opens the appropriate modal in view mode (read-only) displaying rejection reason and reviewer comment.,LMS-REQ-020,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Switch to Rejected tab (follow steps from LMS-REQ-020)
+> Wait for rejected requests to load (wait for 3000 ms)
+> Locate a rejected request row
+> Locate Details button: page.getByTestId(/details-btn-/)
+> Verify Details button is visible and has blue styling
+> Click Details button
+> Wait for modal to open (wait for 1000 ms)
+> Verify appropriate modal opens based on request type
+> Verify modal displays review details
+> Verify modal displays reviewer comment with rejection reason
+> Verify modal is in view mode (read-only)",Clicking Details button on rejected request opens appropriate modal in view mode. Modal displays review details and reviewer comment with rejection reason. Modal is read-only. Modal data is correctly populated.
+LMS-REQ-030,Verify customer name link opens Customer360 page in new tab.,Validate that clicking customer name link in table row opens Customer360 page in a new tab with correct mobile parameter in URL.,LMS-REQ-005,Positive,Navigation,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate a request row with customer name
+> Locate customer name link: page.getByTestId(/customer-name-link-/)
+> Verify link is visible
+> Get customer mobile from the row
+> Get link href attribute
+> Verify href contains ""/opstech/customer360""
+> Verify href contains ""mobile="" parameter
+> Click customer name link (with new tab context)
+> Wait for new tab to open (wait for 2000 ms)
+> Verify new tab opens
+> Verify URL contains customer mobile number
+> Verify original page remains open",Customer name link has correct href with Customer360 URL and mobile parameter. Clicking link opens Customer360 page in new tab. URL contains correct mobile number parameter. Original LMS Requests page remains open in original tab.
+LMS-REQ-031,Verify loading overlay appears during initial request fetch.,Validate that loading overlay with spinner and message appears when selecting a center and fetching requests for the first time.,LMS-REQ-001,Positive,Load,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Click first center option
+> Immediately verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Verify overlay covers entire screen (fixed inset-0)
+> Verify overlay has high z-index
+> Verify overlay content: page.getByTestId(""lms-requests-loading-overlay-content"")
+> Verify loading spinner: page.getByTestId(""lms-requests-loading-overlay-spinner"")
+> Verify spinner is animating
+> Verify loading message: page.getByTestId(""lms-requests-loading-overlay-message"")
+> Verify message text is ""Loading collection requests...""
+> Wait for API call to complete (wait for 3000 ms)
+> Verify loading overlay disappears",Loading overlay appears immediately when center is selected. Overlay covers entire screen with high z-index. Spinner is visible and animating. Message displays ""Loading collection requests..."". Overlay disappears when API call completes. User cannot interact with page during loading.
+LMS-REQ-032,Verify loading overlay appears when switching tabs.,Validate that loading overlay appears when switching between Pending, Approved, and Rejected tabs to indicate data is being fetched.,LMS-REQ-005,Positive,Load,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Click Approved tab: page.getByTestId(""tab-approved"").click()
+> Immediately verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Verify overlay is visible
+> Verify spinner is animating
+> Verify message displays ""Loading collection requests...""
+> Wait for API call to complete (wait for 3000 ms)
+> Verify loading overlay disappears
+> Click Rejected tab: page.getByTestId(""tab-rejected"").click()
+> Immediately verify loading overlay appears again
+> Wait for API call to complete (wait for 3000 ms)
+> Verify loading overlay disappears",Loading overlay appears when switching to Approved tab. Overlay appears when switching to Rejected tab. Spinner animates and message displays correctly. Overlay disappears when data loads. Loading state is properly managed during tab switches.
+LMS-REQ-033,Verify empty state displays when no requests match filters.,Validate that empty state message ""No collection requests found"" is displayed when table has no data after filtering or when no requests exist for selected criteria.,LMS-REQ-005,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center that has no requests (or apply filters that return no results)
+> Wait for table to load (wait for 3000 ms)
+> Verify empty state: page.getByTestId(""lms-collection-request-table-empty"")
+> Verify empty state is visible
+> Verify empty state message text is ""No collection requests found""
+> Verify table body does not contain any rows
+> Verify table header is still visible",Empty state displays when no requests match filters. Empty state message shows ""No collection requests found"". Table body has no rows. Table header remains visible. Empty state is properly styled and centered.
+LMS-REQ-034,Verify error state displays when API call fails.,Validate that error message is displayed in table area when API call fails due to network error or server error.,LMS-REQ-005,Negative,Data Validation,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Simulate API failure (network error or 500 error)
+> Wait for error to appear (wait for 2000 ms)
+> Verify error container: page.getByTestId(""lms-collection-request-table-error"")
+> Verify error container is visible
+> Verify error message is displayed
+> Verify error message text contains error details
+> Verify toast notification appears with error message
+> Verify table is not displayed",Error container displays when API call fails. Error message is visible and descriptive. Toast notification appears with error message. Table is not displayed. Error state is properly styled with red background.
+LMS-REQ-035,Verify table empty state displays when user filter returns no results.,Validate that empty state is displayed when user filter is enabled and selected users have no requests.,LMS-REQ-011,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Select a user that has no requests (follow steps from LMS-REQ-011)
+> Wait for table to filter (wait for 2000 ms)
+> Verify empty state: page.getByTestId(""lms-collection-request-table-empty"")
+> Verify empty state message is displayed
+> Verify table has no rows",Empty state displays when user filter returns no results. Empty state message shows ""No collection requests found"". Table has no rows. Filtering works correctly and shows appropriate empty state.
+LMS-REQ-036,Verify search filter with special characters is sanitized.,Validate that entering special characters or potentially dangerous input in search field is sanitized to prevent XSS attacks.,LMS-REQ-005,Negative,Data Validation,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate search input: page.getByTestId(""search-input"")
+> Enter special characters: page.getByTestId(""search-input"").fill(""<script>alert('xss')</script>"")
+> Click search button: page.getByTestId(""search-button"").click()
+> Wait for 1000 ms
+> Verify search input value does not contain script tags
+> Verify no script execution occurs
+> Verify table still functions correctly
+> Verify no errors in console",Special characters and script tags are sanitized from search input. No script execution occurs. Search input value is cleaned. Table continues to function correctly. XSS attacks are prevented.
+LMS-REQ-037,Verify table row hover effect works correctly.,Validate that hovering over a table row applies hover styling (background color change, scale effect, shadow).,LMS-REQ-005,Positive,UI,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate a table row: page.getByTestId(/lms-collection-request-table-row-/).first()
+> Verify row is visible
+> Hover over the row
+> Wait for 200 ms
+> Verify row background color changes (teal-50)
+> Verify row has shadow effect
+> Verify row scales slightly (scale-[1.01])
+> Move mouse away from row
+> Verify row returns to normal styling",Hovering over table row applies hover styling. Row background changes to teal-50. Row has shadow effect. Row scales slightly. Moving mouse away returns row to normal styling. Hover effect works smoothly.
+LMS-REQ-038,Verify status badge displays correct color for PENDING status.,Validate that requests with PENDING status display yellow status badge with correct styling.,LMS-REQ-005,Positive,UI,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify Pending tab is active
+> Locate a pending request row
+> Verify status badge displays ""PENDING""
+> Verify badge has yellow background (bg-yellow-100)
+> Verify badge has yellow text (text-yellow-800)
+> Verify badge has yellow border (border-yellow-200)",Status badge for PENDING requests displays ""PENDING"" text. Badge has yellow background, yellow text, and yellow border. Badge styling matches design specifications.
+LMS-REQ-039,Verify status badge displays correct color for APPROVED status.,Validate that requests with APPROVED status display green status badge with correct styling.,LMS-REQ-019,Positive,UI,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Switch to Approved tab (follow steps from LMS-REQ-019)
+> Wait for approved requests to load (wait for 3000 ms)
+> Locate an approved request row
+> Verify status badge displays ""APPROVED""
+> Verify badge has green background (bg-green-100)
+> Verify badge has green text (text-green-800)
+> Verify badge has green border (border-green-200)",Status badge for APPROVED requests displays ""APPROVED"" text. Badge has green background, green text, and green border. Badge styling matches design specifications.
+LMS-REQ-040,Verify status badge displays correct color for REJECTED status.,Validate that requests with REJECTED status display red status badge with correct styling.,LMS-REQ-020,Positive,UI,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Switch to Rejected tab (follow steps from LMS-REQ-020)
+> Wait for rejected requests to load (wait for 3000 ms)
+> Locate a rejected request row
+> Verify status badge displays ""REJECTED""
+> Verify badge has red background (bg-red-100)
+> Verify badge has red text (text-red-800)
+> Verify badge has red border (border-red-200)",Status badge for REJECTED requests displays ""REJECTED"" text. Badge has red background, red text, and red border. Badge styling matches design specifications.
+LMS-REQ-041,Verify table displays formatted dates in Submitted On column.,Validate that dates in Submitted On column are formatted correctly using locale date format (e.g., MM/DD/YYYY).,LMS-REQ-005,Positive,Data Display,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Locate Submitted On column cells
+> Verify dates are displayed in readable format
+> Verify dates use locale date format
+> Verify dates are not in raw ISO format
+> Verify ""N/A"" is displayed if date is missing",Dates in Submitted On column are formatted using locale date format (e.g., MM/DD/YYYY). Dates are readable and properly formatted. Missing dates show ""N/A"". Date formatting is consistent across all rows.
+LMS-REQ-042,Verify table header remains sticky when scrolling.,Validate that table header remains visible at the top when scrolling through many table rows.,LMS-REQ-005,Positive,UI,"> Navigate to LMS Requests page
+> Select a center with many requests (50+)
+> Wait for table to load (wait for 3000 ms)
+> Verify table has scrollable content
+> Verify table header: page.getByTestId(""lms-collection-request-table-header"")
+> Scroll down through table rows
+> Verify header remains visible at top
+> Verify header has sticky positioning
+> Verify header maintains styling when sticky",Table header remains sticky at top when scrolling. Header is always visible. Header maintains styling and positioning. Sticky behavior works correctly for long lists of requests.
+LMS-REQ-043,Verify recent days config parameter is fetched and displayed in tab subtitle.,Validate that the COLLECTION_REQUEST_HISTORY_DAYS config parameter is fetched on component mount and displayed in Approved/Rejected tab subtitles.,LMS-REQ-005,Positive,Data Validation,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Switch to Approved tab: page.getByTestId(""tab-approved"").click()
+> Wait for tab to load (wait for 3000 ms)
+> Verify tab subtitle: page.getByTestId(""tab-approved-subtitle"")
+> Verify subtitle is visible
+> Verify subtitle text contains ""Last""
+> Verify subtitle text contains ""Days"" or ""Day""
+> Verify subtitle shows number from config (default 30 if config not available)
+> Switch to Rejected tab: page.getByTestId(""tab-rejected"").click()
+> Wait for tab to load (wait for 3000 ms)
+> Verify tab subtitle: page.getByTestId(""tab-rejected-subtitle"")
+> Verify subtitle shows same number of days",Config parameter COLLECTION_REQUEST_HISTORY_DAYS is fetched on mount. Approved tab subtitle displays ""Last X Days"" where X is from config. Rejected tab subtitle displays ""Last X Days"" where X is from config. Default value (30) is used if config not available.
+LMS-REQ-044,Verify collectionId from context loads requests without requiring center selection.,Validate that when navigating to page with collectionId in context, requests are loaded automatically without requiring center selection.,LMS-REQ-001,Positive,Navigation,"> Navigate to LMS Requests page with collectionId in context (from action menu)
+> Wait for page to load (wait for 2000 ms)
+> Verify loading overlay appears: page.getByTestId(""lms-requests-loading-overlay"")
+> Wait for table to load (wait for 3000 ms)
+> Verify loading overlay disappears
+> Verify table component appears: page.getByTestId(""lms-collection-request-table"")
+> Verify table displays requests for that collection
+> Verify empty state is not displayed
+> Verify center dropdown may show selected center from API response",When collectionId is present in context, requests are loaded automatically. Loading overlay appears during fetch. Table displays requests for that specific collection. Empty state is not displayed. Center selection may be auto-populated from API response.
+LMS-REQ-045,Verify changing center clears collectionId from context.,Validate that manually changing center selection after arriving with collectionId clears the collectionId from context and fetches requests using new center selection.,LMS-REQ-044,Positive,Functional,"> Navigate to LMS Requests page with collectionId in context (from action menu)
+> Wait for table to load (wait for 3000 ms)
+> Open center dropdown: page.getByTestId(""center-dropdown-button"").click()
+> Wait for dropdown to open (wait for 500 ms)
+> Select a different center
+> Wait for loading overlay (wait for 1000 ms)
+> Wait for table to reload (wait for 3000 ms)
+> Verify table displays requests for new center selection
+> Verify collectionId is cleared from context
+> Verify requests are fetched using centerId instead of collectionId",Manually changing center selection clears collectionId from context. Table reloads with requests from new center selection. Requests are fetched using centerId parameter instead of collectionId. Context is properly updated.
+LMS-REQ-046,Verify table displays correct number of rows matching filters.,Validate that table displays only the number of rows that match the applied filters (center, user, search).,LMS-REQ-005,Positive,Data Validation,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Count total rows: page.getByTestId(/lms-collection-request-table-row-/).count()
+> Apply user filter (follow steps from LMS-REQ-011)
+> Wait for table to filter (wait for 2000 ms)
+> Count filtered rows
+> Verify filtered row count matches expected count based on filter
+> Apply search filter (follow steps from LMS-REQ-014)
+> Wait for table to filter (wait for 2000 ms)
+> Count filtered rows again
+> Verify row count matches combined filter criteria",Table displays correct number of rows matching filters. Row count decreases when filters are applied. Row count matches expected count based on filter criteria. Filtering logic works correctly.
+LMS-REQ-047,Verify table handles large dataset without performance issues.,Validate that table can display and handle large number of requests (100+) without lag, freezing, or performance degradation.,LMS-REQ-005,Positive,Load,"> Navigate to LMS Requests page
+> Select a center with many requests (100+)
+> Wait for table to load (wait for 5000 ms)
+> Verify table loads successfully
+> Verify all rows are displayed
+> Verify scrolling works smoothly
+> Verify sorting works without lag
+> Verify filtering works without lag
+> Verify no browser freezing or performance issues
+> Measure page load time (should be < 5 seconds)",Table handles large dataset (100+ requests) successfully. All rows are displayed. Scrolling, sorting, and filtering work smoothly without lag. No browser freezing or performance issues. Page load time is acceptable (< 5 seconds).
+LMS-REQ-048,Verify all interactive elements have data-testid attributes.,Validate that all interactive elements (buttons, inputs, dropdowns, links, table rows) have proper data-testid attributes for Playwright automation.,LMS-REQ-001,Positive,Component,"> Navigate to LMS Requests page
+> Wait for page to load (wait for 2000 ms)
+> Verify page container has testId: page.getByTestId(""lms-requests-page"")
+> Verify banner has testId: page.getByTestId(""collection-banner"")
+> Verify center dropdown button has testId: page.getByTestId(""center-dropdown-button"")
+> Verify user dropdown button has testId: page.getByTestId(""user-dropdown-button"")
+> Verify search input has testId: page.getByTestId(""search-input"")
+> Verify search button has testId: page.getByTestId(""search-button"")
+> Select a center and wait for table
+> Verify table has testId: page.getByTestId(""lms-collection-request-table"")
+> Verify table rows have testIds: page.getByTestId(/lms-collection-request-table-row-/)
+> Verify action buttons have testIds: page.getByTestId(/review-btn-/) or page.getByTestId(/details-btn-/)
+> Verify tabs have testIds: page.getByTestId(/tab-/)",All interactive elements have data-testid attributes. Page container, banner, dropdowns, inputs, buttons, table, rows, and tabs all have proper testIds. TestIds follow naming conventions. Elements are testable with Playwright automation.
+LMS-REQ-049,Verify page cleanup on component unmount clears centerId from context.,Validate that when navigating away from LMS Requests page, centerId is cleared from context to prevent stale data.,LMS-REQ-005,Positive,Functional,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Verify centerId is set in context
+> Navigate away from page (go to different page)
+> Wait for 1000 ms
+> Navigate back to LMS Requests page
+> Verify centerId is cleared from context
+> Verify empty state is displayed
+> Verify center selection is reset",Navigating away from page clears centerId from context. Context cleanup works correctly on component unmount. Returning to page shows empty state. Center selection is reset. No stale data remains in context.
+LMS-REQ-050,Verify concurrent API calls are prevented.,Validate that multiple rapid filter changes do not trigger concurrent API calls, and only one API call is executed at a time.,LMS-REQ-005,Positive,Load,"> Navigate to LMS Requests page
+> Select a center (follow steps from LMS-REQ-005)
+> Wait for table to load (wait for 3000 ms)
+> Rapidly change center selection multiple times
+> Rapidly switch tabs multiple times
+> Verify only one loading overlay appears at a time
+> Verify API calls are not duplicated
+> Verify table loads correctly after rapid changes
+> Verify no race conditions occur",Rapid filter changes do not trigger concurrent API calls. Only one loading overlay appears at a time. API calls are properly queued or cancelled. Table loads correctly after rapid changes. No race conditions or duplicate API calls occur.
